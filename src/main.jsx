@@ -10,6 +10,9 @@ import {
 import Root from './routes/root'
 import ErrorPage from './routes/errorpage.jsx'
 import SignUp from './auth/signup.jsx'
+import ResetPassword from './auth/ResetPassword.jsx'
+import ResetNewPassword from './auth/ResetNewPassword.jsx'
+
 const router = createBrowserRouter([
   {
     errorElement:<ErrorPage/>,
@@ -48,6 +51,14 @@ const router = createBrowserRouter([
    {
     path: '/signup',
     element: <SignUp/>
+  },
+  {
+    path: '/resetpassword',
+    element: <ResetPassword/>
+  },
+  {
+    path: '/auth/new-password/:token',
+    element: <ResetNewPassword/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
