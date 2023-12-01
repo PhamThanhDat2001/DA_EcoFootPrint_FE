@@ -400,7 +400,7 @@ html {
 
 
   /* Reset CSS */
-body,
+/* body,
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 dl, dd, ol, ul,
@@ -416,10 +416,10 @@ th, td {
   font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
-}
+} */
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
+/* article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -445,4 +445,4 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
+} */

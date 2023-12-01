@@ -1,3 +1,4 @@
+import { Input ,Button} from "antd";
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {

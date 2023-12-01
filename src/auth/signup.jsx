@@ -171,8 +171,8 @@ const Signup = () => {
               </ModalHeader>
               <ModalBody className="text-center m-3">
                 <p className="mb-0">
-                Chúng tôi đã gửi email tới <p>{email}</p>
-               <p>Bạn hãy vào để kích hoạt tài khoản</p> 
+                Chúng tôi đã gửi email tới {email}.
+                Bạn hãy vào để kích hoạt tài khoản
                 </p>
               </ModalBody>
               <ModalFooter>
