@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import * as Yup from 'yup';
 import { Button } from "antd";
 // import { toastr } from "react-redux-toastr";
-
+import '../css/ResetNewPassword.css'
 import {
  
   Card,
@@ -41,9 +41,14 @@ const ResetPassword = () => {
   }
   return(
   <React.Fragment>
+   <div className="mainrsnewpass">
+   <div>
+      <img src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" />
+      <h1 className='slogan'>ECOFOOTPRINT - DẤU CHÂN SINH THÁI</h1>
+    </div>
+    <div>
     <div className="text-center mt-4">
-      <h1 className="h2">Đổi mật khẩu</h1>
-
+      <h2 className="h2">Đổi mật khẩu</h2>
     </div>
     <Formik
     initialValues={
@@ -77,7 +82,7 @@ const ResetPassword = () => {
             // call api
             await Api.resetPassword(token, values.password);
             // message
-            // setOpenModal(true);
+            setOpenModal(true);
             // setEmail(values.email);
             // ShowNotification("cc","cc");
             // reset form
@@ -92,25 +97,23 @@ const ResetPassword = () => {
     // validateOnChange={false}
   >
     {({ isSubmitting }) => (
-    <Form>
+    <Form className="formrsnewpassword">
     
     <div className="m-sm-4">
    
       <div>
-      <label htmlFor="">Nhập Mật khẩu Mới</label>
+      
       <FastField
     name="password"
     type="password"
-  
-    placeholder="Hãy nhập Mật khẩu"
-     
+    placeholder="Hãy nhập Mật khẩu Mới"
   >
     
-  </FastField>
+  </FastField><ErrorMessage name="password" />
       </div>
-  <ErrorMessage name="password" />
+  
   <div>
-  <label htmlFor="">Nhập lại Mật khẩu</label>
+
   <FastField
     name="confirmPassword"
     type="password"
@@ -118,9 +121,9 @@ const ResetPassword = () => {
      
   >
     
-  </FastField>
+  </FastField> <ErrorMessage className="errm" name="confirmPassword" />
   </div>
-  <ErrorMessage name="confirmPassword" />
+ 
 
         <div className="text-center mt-3">
             <Button type="primary" htmlType="submit"  disabled={isSubmitting}>
@@ -133,28 +136,30 @@ const ResetPassword = () => {
 </Form>
     )}
     </Formik>
-    {/* <Modal
+    <Modal className='modalrsnewpass'
               isOpen={isopenModal}
-            >
+              // isOpen={true}
+            > 
               <ModalHeader>
-                Bạn cần xác nhận tài khoản
+                Thông Báo
               </ModalHeader>
               <ModalBody className="text-center m-3">
               <p className="mb-0">
-                Chúng tôi đã gửi email tới {email}
-              Bạn hãy vào để kích hoạt tài khoản
+                Chúc mùng bạn đã đổi mật khẩu thành công. Vui lòng đăng nhập 
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button color="secondary" onClick={resenEmailToResetPassword} disabled={isDisableButtonResend}>
-                  Gửi lại
-                </Button>
+                <Link className="linh" color="secondary"  to="/dang-nhap" disabled={isDisableButtonResend}>
+                 Đăng nhập
+                </Link>
                 <Button    color="primary"
                 >
                  Đã hiểu
                 </Button>
               </ModalFooter>
-            </Modal> */}
+            </Modal>
+    </div>
+   </div>
   </React.Fragment>
 )};
 

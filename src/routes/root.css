@@ -3,7 +3,7 @@
     color: #fff;
     padding: 10px;
   }
-  body {
+  .navleft {
     display: flex;
     flex-direction: row;
     min-height: 100vh; /* Đảm bảo body có ít nhất chiều cao bằng viewport */
@@ -24,7 +24,7 @@ html {
     box-sizing: inherit;
   }
   
-  body {
+  .navleft {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
@@ -38,12 +38,15 @@ html {
   }
   
   html,
-  body {
+  .navleft {
     height: 100%;
     margin: 0;
     line-height: 1.5;
     color: #121212;
   }
+  /* .navleft li {
+    display: flex;
+  } */
   textarea,
   input,
   button {
@@ -397,52 +400,14 @@ html {
     justify-content: center;
     width: 100%;
   }
-
+/* ------ */
+body {
+  margin: 0px; /* Thay đổi giá trị theo mong muốn của bạn */
+}
 
   /* Reset CSS */
-/* body,
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-dl, dd, ol, ul,
-figure,
-hr,
-fieldset, legend,
-button, input, select, textarea,
-th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  box-sizing: border-box;
-} */
 
-/* HTML5 display-role reset for older browsers */
-/* article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
 
-body {
-  line-height: 1;
-}
 
-ol, ul {
-  list-style: none;
-}
 
-blockquote, q {
-  quotes: none;
-}
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-} */

@@ -3,6 +3,7 @@ import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import { Button} from 'antd';
+import '../css/resetpasswoRd.css'
 import {
  
   Card,
@@ -20,16 +21,27 @@ const ResetPassword = () => {
   const [isopenModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState("");
   const [isDisableButtonResend, setDisableButtonResend] = useState(false); 
+  const handleModalClose = () => {
+    setOpenModal(false);
+    // Thực hiện các xử lý khác khi modal đóng
+  };
   const resenEmailToResetPassword = async() =>{
     setDisableButtonResend(true)
     await Api.resendresetPasswordRequest(email);
     setDisableButtonResend(false)
   }
   return(
-  <React.Fragment>
+    
+  <>
+   <div className="mainrspass">
+   <div>
+      <img src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" />
+      <h1 className='slogan'>ECOFOOTPRINT - DẤU CHÂN SINH THÁI</h1>
+    </div>
+    <div>
     <div className="text-center mt-4">
-      <h1 className="h2">Reset password</h1>
-      <p className="lead">Enter your email to reset your password.</p>
+      <h2 className="quenmatkhau">Quên Mật Khẩu</h2>
+      <p className="lead">Nhập Email của bạn để lấy lại mật khẩu</p>
     </div>
     <Formik
     initialValues={
@@ -72,7 +84,7 @@ const ResetPassword = () => {
     validateOnChange={false}
   >
     {({ isSubmitting }) => (
-    <Form>
+    <Form className='form-resetpassword'>
     
         <div className="m-sm-4">
        
@@ -89,7 +101,7 @@ const ResetPassword = () => {
     
             <div className="text-center mt-3">
                 <Button type="primary" htmlType="submit"  disabled={isSubmitting}>
-                  Reset password
+                  Gửi Email
                 </Button>
             </div>
         
@@ -98,8 +110,9 @@ const ResetPassword = () => {
     </Form>
     )}
     </Formik>
-    <Modal
+    <Modal className='modalresetpassword'
               isOpen={isopenModal}
+              // isOpen={true}
             >
               <ModalHeader>
                 Bạn cần xác nhận tài khoản
@@ -107,20 +120,22 @@ const ResetPassword = () => {
               <ModalBody className="text-center m-3">
               <p className="mb-0">
                 Chúng tôi đã gửi email tới {email}
-              Bạn hãy vào để kích hoạt tài khoản
+              Bạn hãy vào để lấy lại mật khẩu
                 </p>
               </ModalBody>
               <ModalFooter>
                 <Button color="secondary" onClick={resenEmailToResetPassword} disabled={isDisableButtonResend}>
                   Gửi lại
                 </Button>
-                <Button    color="primary"
+                <Button    color="primary" onClick={handleModalClose}
                 >
                  Đã hiểu
                 </Button>
               </ModalFooter>
             </Modal>
-  </React.Fragment>
+    </div>
+   </div>
+  </>
 )};
 
 export default ResetPassword;
