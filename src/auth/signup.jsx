@@ -4,6 +4,7 @@ import { ErrorMessage, FastField, Formik, Form  } from 'formik';
 import { Button, Checkbox, Input} from 'antd';
 import * as Yup from 'yup';
 import Api from '../api/userApi';
+import '../css/signup.css'
 import {
  
   Card,
@@ -19,17 +20,32 @@ import {
   Row
 } from "reactstrap";
 import ModalSignup from '../modal/modalsignup';
+import { Link } from 'react-router-dom';
 const Signup = () => {
   const [isopenModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState("");
   const [isDisableButtonResend, setDisableButtonResend] = useState(false); 
+  const handleModalClose = () => {
+    setOpenModal(false);
+    // Thực hiện các xử lý khác khi modal đóng
+  };
   const resenEmailToActive = async() =>{
     setDisableButtonResend(true)
     await Api.ResentEmailToActive(email);
     setDisableButtonResend(false)
   }
+  const styles = `
+  .error-message {
+    color: red;
+  }`;
   return(
   <>
+ <div id='ptc'>
+ <div>
+      <img src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" />
+      <h1 className='slogan'>ECOFOOTPRINT - DẤU CHÂN SINH THÁI</h1>
+    </div>
+    
   <Formik
     initialValues={
       {
@@ -75,6 +91,7 @@ const Signup = () => {
         //   )
         // })
     })}
+    
     onSubmit={
       async (values, { resetForm }) => {
       
@@ -96,9 +113,12 @@ const Signup = () => {
     validateOnChange={false}
   >
     {({ isSubmitting }) => (
-    <Form>
+    // <div>
+    
+      <Form className='form-signup'>
+        <h3>Đăng Ký Tài Khoản</h3>
         <div>
-          <label htmlFor="">Tài khoản</label>
+          {/* <label htmlFor="">Tài khoản</label> */}
         <FastField
         label="sse"
         name="username"
@@ -113,12 +133,12 @@ const Signup = () => {
         ]}   
         
       ></FastField>
-        <ErrorMessage  name="username"  />
+        
         </div>
-    
+        <ErrorMessage  name="username"  />
         
         <div>
-          <label htmlFor="">Email</label>
+          {/* <label htmlFor="">Email</label> */}
         <FastField
         name="email"
         type="text"
@@ -127,11 +147,11 @@ const Signup = () => {
          
       ></FastField>
     
-      <ErrorMessage name="email" />
+    
         </div>
-        
+        <ErrorMessage  name="email" />
        <div>
-        <label htmlFor="">Mật khẩu</label>
+        {/* <label htmlFor="">Mật khẩu</label> */}
        <FastField
         label="Password"
         name="password"
@@ -141,10 +161,11 @@ const Signup = () => {
          
       ></FastField>
     
-      <ErrorMessage name="password" />
+    
        </div>
+       <ErrorMessage name="password" />
         <div>
-        <label htmlFor="">Nhập lại Mật khẩu</label>
+        {/* <label htmlFor="">Nhập lại Mật khẩu</label> */}
         <FastField
         name="confirmPassword"
         type="password"
@@ -153,18 +174,27 @@ const Signup = () => {
          
       ></FastField>
      
-      <ErrorMessage name="confirmPassword" />
+    
         </div>
+          <ErrorMessage name="confirmPassword" />
         <Button type="primary" htmlType="submit" disabled={isSubmitting}>
-          Submit
+          Đăng Ký
         </Button>
-      
+        <div className="form-links">
+        <Link to="/dang-nhap">Đăng Nhập</Link>
+        <Link to="/ResetPassword">Quên Mật Khẩu</Link>
+      </div>
     </Form>
+    
+    // </div>
     )}
   </Formik>
+  
+ </div>
   {/* <ModalSignup/> */}
-  <Modal
+  <Modal className="modalsignup"
               isOpen={isopenModal}
+             
             >
               <ModalHeader>
                 Bạn cần xác nhận tài khoản
@@ -179,10 +209,7 @@ const Signup = () => {
                 <Button color="secondary" onClick={resenEmailToActive} disabled={isDisableButtonResend}>
                   Gửi lại
                 </Button>
-                <Button    color="primary"
-              
-                 
-                >
+                <Button color="primary" onClick={handleModalClose}>
                  Đã hiểu
                 </Button>
               </ModalFooter>

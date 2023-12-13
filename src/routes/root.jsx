@@ -1,44 +1,23 @@
 import { Outlet,Link } from "react-router-dom";
 import Navbar from "../components/header.jsx";
+import Footer from "../components/footer.jsx";
+import MainContent from "../components/maincontent.jsx";
 
 export default function Root() {
-    return (
-      <>
-      <div id="header">
-        <Navbar/>
-      </div>
-      <div id="main">
-      <body>
-        <div id="sidebar">
-          <nav>
-          <ul>
-              <li>
-                <Link to={`/trangchu`}>Trang chủ</Link>
-              </li>
-              <li>
-                <Link to={`/nhatkyhoatdong`}>Nhật ký hoạt động</Link>
-              </li>
-              <li>
-                <Link to={`/tinhtoan`}>Tính Toán</Link>
-              </li>
-              <li>
-                <Link to={`/noidunggiaoduc`}>Nội dung giáo dục</Link>
-              </li>
-              <li>
-                <Link to={`/congdong`}>Cộng đồng</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div id="detail">
-            <Outlet></Outlet>
-        </div>
-        </body>
-      </div>
-       
-        <div id ="footer">
-            <h1>Footer</h1>
-        </div>
-      </>
-    );
+  return (
+    <>
+      <header id="header">
+        <Navbar />
+      </header>
+
+      {/* Sử dụng component con MainContent */}
+      <main id="main">
+        <MainContent />
+      </main>
+
+      <footer id="footer">
+        <Footer />
+      </footer>
+    </>
+  );
   }

@@ -1,0 +1,105 @@
+/* signup.css */
+
+#ptc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4; /* Màu nền của trang */
+}
+
+.form-signup {
+  width: 300px;
+  padding: 20px;
+  background-color: #fff; /* Màu nền của form */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-signup h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-signup div {
+  margin-bottom: 15px;
+}
+
+.form-signup input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd; 
+  border-radius: 4px;
+}
+
+.form-signup button {
+  width: 100%;
+}
+
+.form-signup button:disabled {
+  background-color: #b0c4de; /* Màu nền của button khi bị disable */
+}
+
+.form-signup div > a {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #1890ff; /* Màu chữ của các liên kết */
+}
+
+.form-signup div > a:hover {
+  text-decoration: underline;
+}
+/* Thêm vào cuối file signup.css */
+
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Khoảng cách giữa nút Đăng Ký và các liên kết */
+  }
+  h1{
+    margin-left: 100px;
+  }
+  .form-links a {
+    text-decoration: none;
+    color: #1890ff; /* Màu của các liên kết */
+  }
+  
+  .modalsignup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px; /* Độ rộng tối đa của modal */
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+
+  .modalsignup .modal-header {
+    display: flex;
+    justify-content: center;
+    background-color: #f0f0f0;
+    /* Màu nền chân modal */
+  }
+  
+  .modalsignup .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    /* Màu nền chân modal */
+  }
+  
+  /* Thêm các quy tắc CSS khác tùy thuộc vào thiết kế bạn mong muốn */
+  /* Thêm các kiểu dáng cho container của modal */
+
+  
+  /* Thiết kế nội dung của modal */
+  .modal-content {
+    background-color: #fff;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
