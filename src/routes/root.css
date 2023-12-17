@@ -1,8 +1,9 @@
-#header, #footer {
-    background-color: #333;
+#header {
+    background-color: #80f880;
     color: #fff;
     padding: 10px;
   }
+
   .navleft {
     display: flex;
     flex-direction: row;

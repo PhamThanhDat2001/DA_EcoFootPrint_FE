@@ -8,6 +8,7 @@ const urlResentEmail = "/user/userRegistrationConfirmRequest?"
 const urlresetPassRequest = "/resetPasswordRequest"
 const urlresendresetPass = "/resendResetPassword?"
 const urlresetPass = "/resetPassword"
+
 const existsByEmail = (email) => {
     return Api.get(`${url2}/${email}`);
 };

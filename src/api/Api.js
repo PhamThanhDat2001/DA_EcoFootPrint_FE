@@ -20,6 +20,16 @@ axiosClient.interceptors.response.use((response) => {
     return response;
 }, (error) => {
     // Handle errors
+    // if(error.response){
+    //     throw error.response,
+    //     console.log('loi 1')
+    // }else if(error.request){
+    //     throw error.request ,
+    //     console.log('loi 1')
+    // } 
+    // else {
+    //     throw error;
+    // }
     throw error;
 });
 

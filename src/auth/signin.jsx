@@ -1,28 +1,27 @@
 import React,{useState} from 'react';
 import ReactDOM from "react-dom";
 import { ErrorMessage, FastField, Formik, Form  } from 'formik';
-import { Button, Checkbox, Input} from 'antd';
+import { Button, Checkbox, Input,Alert} from 'antd';
 import * as Yup from 'yup';
 import Api from '../api/userApi';
-import '../css/signup.css'
+import Loginapi from '../api/signinApi';
+import '../css/signup.css';
+import {setUserLoginInfo,setTokenInfo} from '../redux/actions/UserLoginInfoActions.js'
+import { connect } from 'react-redux';
+// import {WithRouter} from 'react-router-dom'
 import {
- 
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Col,
-  Container,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
-  Row
 } from "reactstrap";
 import ModalSignup from '../modal/modalsignup';
 import { Link } from 'react-router-dom';
-const Signup = () => {
+import Storage from '../storage/storage.js';
+import Aler from './test.jsx';
+const Signin = (props) => {
   const [isopenModal, setOpenModal] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [email, setEmail] = useState("");
   const [isDisableButtonResend, setDisableButtonResend] = useState(false); 
   const handleModalClose = () => {
@@ -50,65 +49,80 @@ const Signup = () => {
     initialValues={
       {
         username: '',
-        email: '',
+      
         password: '',
-        confirmPassword: ''
+      
       }
     } validationSchema={Yup.object({
       username: Yup.string()
         .min(6, 'Tài khoản phải trên 6 kí tự và dưới 50 kí tự')
         .max(50, 'Tài khoản phải trên 6 kí tự và dưới 50 kí tự')
         .required('Hãy nhập Tài khoản')
-        .test('checkUniqueUsername', 'Tài khoản này đã được đăng ký', async username => {
+        .test('checkUniqueUsername', 'Tài khoản này chưa được đăng ký', async username => {
           // call api
           const isExists = await Api.existsByusername(username);
-          console.log(isExists);
-          return !isExists;
-      }),
-        
-      email: Yup.string()
-        .email('Email không hợp lệ')
-        .required('Hãy nhập Email')
-        .test('checkUniqueEmail', 'Email này đã được đăng ký', async email => {
-          // call api
-          const isExists = await Api.existsByEmail(email);
-          console.log(isExists);
-          return !isExists;
+          // console.log(isExists);
+          return isExists;
       })
-      ,
+    ,
+        
+    
+      
       password: Yup.string()
         .min(6, 'Mật khẩu phải trên 6 kí tự và dưới 50 kí tự')
         .max(50, 'Mật khẩu phải trên 6 kí tự và dưới 50 kí tự')
         .required('Hãy nhập mật khẩu'),
-        confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Mật khẩu xác nhận phải giống với mật khẩu đã nhập')
-        .required('Hãy xác nhận mật khẩu'),
-      // confirmPassword: Yup.string()
-      //   .required('Hãy nhập xác nhận mật khẩu')
+
       
-        // .when("password", {
-        //   is: values => (values && values.length > 0 ? true : false),
-        //   then: Yup.string().oneOf(
-        //     [Yup.ref("password")],
-        //     "Both password need to be the same"
-        //   )
-        // })
     })}
     
     onSubmit={
-      async (values, { resetForm }) => {
+      async (values) => {
       
         try {
-            // call api
-            await Api.create(values.username,values.email,values.password);
-            // message
-            setOpenModal(true);
-            setEmail(values.email);
-            
-            // reset form
-            resetForm({});
+            const result =await Loginapi.Signin(values.username,values.password);
+            if(result.status === 'NOT_ACTIVE' ){
+              // console.log(result);
+              setEmail(result.email)
+              setOpenModal(true)
+              console.log('1')
+            }else{
+              setShowAlert(false);
+              Storage.setToken(result.token)
+              Storage.setUserInfo(
+                result.username,
+                result.email,
+                result.fullname,
+                result.gender,
+                result.address,
+                result.birthday,
+                result.phone,
+                result.status);
+
+                props.setTokenInfo(result.token);
+                props.setUserLoginInfo(
+                  result.username,
+                  result.email,
+                  result.fullname,
+                  result.gender,
+                  result.address,
+                  result.birthday,
+                  result.phone,
+                  result.status)
+            }
+
+
+            ;
         } catch (error) {
-            console.log(error);
+          console.log(error);
+          if (error.response && error.response.status === 401) {
+            console.log('avc');
+            setShowAlert(true);
+           
+          } else {
+            // Handle other errors
+            console.error('Error:', error);
+          }
         }
     }
     }
@@ -119,7 +133,7 @@ const Signup = () => {
     // <div>
     
       <Form className='form-signup'>
-        <h3>Đăng ký tài khoản</h3>
+        <h3>Đăng nhập</h3>
         <div>
           {/* <label htmlFor="">Tài khoản</label> */}
         <FastField
@@ -142,13 +156,7 @@ const Signup = () => {
         
         <div>
           {/* <label htmlFor="">Email</label> */}
-        <FastField
-        name="email"
-        type="text"
       
-        placeholder="Hãy nhập email"
-         
-      ></FastField>
     
     
         </div>
@@ -163,28 +171,29 @@ const Signup = () => {
         placeholder="Hãy nhập mật khẩu"
          
       ></FastField>
-    
+     {showAlert && (
+  <Alert
+  // message="Sai tài khoản hoặc mật khẩu"
+  description="Sai tài khoản hoặc mật khẩu"
+  type="error"
+  showIcon
+  style={{ fontSize: '12px', padding: '8px', borderRadius: '4px' }} 
+/>
+)}
     
        </div>
        <ErrorMessage name="password" />
         <div>
         {/* <label htmlFor="">Nhập lại Mật khẩu</label> */}
-        <FastField
-        name="confirmPassword"
-        type="password"
-    
-        placeholder="Xác nhận mật khẩu"
-         
-      ></FastField>
      
     
         </div>
           <ErrorMessage name="confirmPassword" />
         <Button type="primary" htmlType="submit" disabled={isSubmitting}>
-          Đăng ký
+          Đăng nhập
         </Button>
         <div className="form-links">
-        <Link to="/signin">Đăng nhập</Link>
+        <Link to="/signup">Đăng ký</Link>
         <Link to="/ResetPassword">Quên mật khẩu</Link>
       </div>
     </Form>
@@ -194,25 +203,28 @@ const Signup = () => {
   </Formik>
   
  </div>
+
   {/* <ModalSignup/> */}
   <Modal className="modalsignup"
               isOpen={isopenModal}
              
             >
               <ModalHeader>
-                Bạn cần xác nhận tài khoản
+                Bạn cần kích hoạt tài khoản của mình
               </ModalHeader>
               <ModalBody className="text-center m-3">
                 <p className="mb-0">
-                Chúng tôi đã gửi email tới {email}.
-                Bạn hãy vào để kích hoạt tài khoản
+                Tài khoản của bạn chưa được kích hoạt. <br />
+                Bạn hãy kiểm tra email {email} để kích hoạt tài khoản của bạn
                 </p>
               </ModalBody>
               <ModalFooter>
                 <Button color="secondary" onClick={resenEmailToActive} disabled={isDisableButtonResend}>
                   Gửi lại
                 </Button>
+                {/* <Button color="primary" onClick={() => setOpenModal(false)}> */}
                 <Button color="primary" onClick={handleModalClose}>
+
                  Đã hiểu
                 </Button>
               </ModalFooter>
@@ -220,4 +232,5 @@ const Signup = () => {
   </>
 
 )};
-export default Signup;
+// export default Signin;
+export default connect(null, { setUserLoginInfo, setTokenInfo})(Signin);
