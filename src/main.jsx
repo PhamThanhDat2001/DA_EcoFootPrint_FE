@@ -12,7 +12,9 @@ import ErrorPage from './routes/errorpage.jsx'
 import SignUp from './auth/signup.jsx'
 import ResetPassword from './auth/ResetPassword.jsx'
 import ResetNewPassword from './auth/ResetNewPassword.jsx'
-
+import Signin from './auth/signin.jsx'
+import { Provider } from "react-redux";
+import store from './redux/store/index.js'
 const router = createBrowserRouter([
   {
     errorElement:<ErrorPage/>,
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
     element: <SignUp/>
   },
   {
+    path: '/signin',
+    element: <Signin/>
+  },
+  {
     path: '/resetpassword',
     element: <ResetPassword/>
   },
@@ -62,7 +68,19 @@ const router = createBrowserRouter([
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //   <RouterProvider router={router} />
+  // </React.StrictMode>,
+
+<React.StrictMode>
+    <Provider store={store}>
+    {/* <Provider > */}
+      {/* <Router> */}
+      <RouterProvider router={router} />
+      {/* </Router> */}
+      </Provider>
+    {/* </Provider> */}
+  </React.StrictMode>
+
+  
 )

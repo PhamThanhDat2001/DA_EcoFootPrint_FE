@@ -53,7 +53,6 @@ const ResetPassword = () => {
     <Formik
     initialValues={
       {
-   
         password: '',
         confirmPassword: ''
       }
@@ -106,7 +105,7 @@ const ResetPassword = () => {
       <FastField
     name="password"
     type="password"
-    placeholder="Hãy nhập Mật khẩu Mới"
+    placeholder="Hãy nhập mật khẩu mới"
   >
     
   </FastField><ErrorMessage name="password" />

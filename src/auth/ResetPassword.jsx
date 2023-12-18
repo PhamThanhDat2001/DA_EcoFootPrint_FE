@@ -18,6 +18,8 @@ import {
 } from "reactstrap";
 import Api from "../api/userApi";
 const ResetPassword = () => {
+  
+  
   const [isopenModal, setOpenModal] = useState(false);
   const [email, setEmail] = useState("");
   const [isDisableButtonResend, setDisableButtonResend] = useState(false); 
@@ -40,8 +42,8 @@ const ResetPassword = () => {
     </div>
     <div>
     <div className="text-center mt-4">
-      <h2 className="quenmatkhau">Quên Mật Khẩu</h2>
-      <p className="lead">Nhập Email của bạn để lấy lại mật khẩu</p>
+      <h2 className="quenmatkhau">Quên mật khẩu</h2>
+      <p className="lead">Nhập email của bạn để lấy lại mật khẩu</p>
     </div>
     <Formik
     initialValues={
@@ -92,7 +94,7 @@ const ResetPassword = () => {
         name="email"
         type="text"
       
-        placeholder="Hãy nhập Email"
+        placeholder="Hãy nhập email"
          
       >
         
@@ -101,7 +103,7 @@ const ResetPassword = () => {
     
             <div className="text-center mt-3">
                 <Button type="primary" htmlType="submit"  disabled={isSubmitting}>
-                  Gửi Email
+                  Gửi email
                 </Button>
             </div>
         
