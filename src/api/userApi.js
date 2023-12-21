@@ -8,7 +8,9 @@ const urlResentEmail = "/user/userRegistrationConfirmRequest?"
 const urlresetPassRequest = "/resetPasswordRequest"
 const urlresendresetPass = "/resendResetPassword?"
 const urlresetPass = "/resetPassword"
-
+const urlgetProfile = "/user/profile"
+const urlgetBy = "/user"
+const urlchangepass = "/change_password"
 const existsByEmail = (email) => {
     return Api.get(`${url2}/${email}`);
 };
@@ -53,8 +55,34 @@ const resendresetPasswordRequest = (email) => {
     return Api.get(`${urlresendresetPass}`, {params:param});
 };
 
+const getProfile = () => {
+ 
+    return Api.get(`${urlgetProfile}`);
+};
+const getById = (id) => {
+    return Api.get(`${urlgetBy}/${id}`);
+};
 
+const update = ( id,fullname,gender,address,birthday,phone) =>{
+    const body ={
+        fullname: fullname,
+        gender:gender,
+        address:address,
+        birthday:birthday,
+        phone:phone,
+      
+    }
+    return Api.put(`${urlgetBy}/${id}`,body);
+}
+
+const changepass = (id,oldPassword,newPassword) =>{
+    const body ={
+        oldPassword:oldPassword,
+        newPassword:newPassword
+    }
+    return Api.post(`${urlchangepass}/${id}`,body);
+}
 // export
-const api = {resetPassword,resendresetPasswordRequest,resetPasswordRequest,ResentEmailToActive,create, existsByEmail,existsByusername }
+const api = {changepass,update,getById,getProfile,resetPassword,resendresetPasswordRequest,resetPasswordRequest,ResentEmailToActive,create, existsByEmail,existsByusername }
 export default api;
 

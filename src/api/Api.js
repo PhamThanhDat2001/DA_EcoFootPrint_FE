@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Storage from '../storage/storage';
 
 const axiosClient = axios.create({
     baseURL: `http://localhost:8080/api/v1`,
@@ -6,11 +7,24 @@ const axiosClient = axios.create({
     responseType: 'json'
 });
 
+// axiosClient.interceptors.request.use(async (config) => {
+//     // Handle token here ...
+//     const token = Storage.getToken();
+//     if(token !== null && token !==undefined){
+//         config.headers.Authorization = token
+//     }
+//     return config;
+// });
 axiosClient.interceptors.request.use(async (config) => {
     // Handle token here ...
+    const token = Storage.getToken();
+  
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  
     return config;
-});
-
+  });
 axiosClient.interceptors.response.use((response) => {
     if (response && response.data !== undefined) {
         // only get data
