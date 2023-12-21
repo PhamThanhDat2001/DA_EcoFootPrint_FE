@@ -1,0 +1,75 @@
+/* Add your custom styles here */
+
+/* Form container styles */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Image styles */
+  .image-container {
+    width: 128px;
+    height: 128px;
+    position: relative;
+    margin-bottom: 20px; /* Add some margin between the image and other form elements */
+  }
+  
+  .image-container img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-button {
+    margin-top: 8px;
+  }
+  
+  /* Form styles */
+  .ant-form {
+    width: 100%; /* Make the form width full to utilize available space */
+    max-width: 600px; /* Limit the form width for better readability */
+  }
+  
+  /* Adjust label styles */
+  .ant-form-item-label {
+    text-align: left; /* Align labels to the left */
+  }
+  
+  /* Adjust input styles */
+  .ant-input {
+    width: 100%; /* Make input fields full-width */
+    margin-bottom: 10px; /* Add margin between input fields */
+  }
+  
+  /* Adjust button styles */
+  .ant-btn {
+    margin-top: 20px; /* Add margin above the button */
+  }
+  /* Image container styles */
+.image-container {
+    width: 128px;
+    height: 128px;
+    position: relative;
+    margin-left: auto; /* Đẩy ảnh về bên phải của form */
+    margin-bottom: 20px;
+    order: 2; /* Đặt thứ tự của container ảnh để nó nằm sau các phần tử khác */
+  }
+  
+  /* Form container styles */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: auto; /* Đẩy toàn bộ form về giữa */
+  }
+  
+  /* Form styles */
+  .ant-form {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  /* ... Các styles khác */
+  

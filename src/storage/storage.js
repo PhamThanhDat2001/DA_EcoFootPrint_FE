@@ -7,6 +7,15 @@ const getToken = () => {
     return localStorage.getItem('token');
 };
 
+const setId = (id) => {
+    localStorage.setItem('id', id);
+};
+
+
+const getId = () => {
+    return localStorage.getItem('id');
+};
+
 const setUserInfo = (username,email,fullname,gender,address,birthday,phone,status) => {
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
@@ -18,23 +27,47 @@ const setUserInfo = (username,email,fullname,gender,address,birthday,phone,statu
     localStorage.setItem('status', status);
 };
 
+
+
 const getUserInfo = () => {
-    return{
-        'username':localStorage.getItem('username'),
-        'email':localStorage.getItem('email'),
-        'fullname':localStorage.getItem('fullname'),
-        'gender':localStorage.getItem('gender'),
-        'address':localStorage.getItem('address'),
-        'birthday':localStorage.getItem('birthday'),
-        'phone':localStorage.getItem('phone'),
-        'status':localStorage.getItem('status'),
-    }
-    
-};
+    return {
+        "username" : localStorage.getItem("username"),
+        "email" : localStorage.getItem("email"),
+        "fullname" : localStorage.getItem("fullname"),
+        "gender" : localStorage.getItem("gender"),
+        "address" : localStorage.getItem("address"),
+        "birthday" : localStorage.getItem("birthday"),
+        "phone" : localStorage.getItem("phone"),
+        "status" : localStorage.getItem("status"),
+    };
+}
+// const setUserInfo = (id,username,email,fullname,gender,address,birthday,phone,status) => {
+//     localStorage.setItem('id', id);
+//     localStorage.setItem('username', username);
+//     localStorage.setItem('email', email);
+//     localStorage.setItem('fullname', fullname);
+//     localStorage.setItem('gender', gender);
+//     localStorage.setItem('address', address);
+//     localStorage.setItem('birthday', birthday);
+//     localStorage.setItem('phone', phone);
+//     localStorage.setItem('status', status);
+// };
 
 
 
-// export
-const Storage = {setToken,getToken,getUserInfo ,setUserInfo}
+// const getUserInfo = () => {
+//     return {
+//         "id" : localStorage.getItem("id"),
+//         "username" : localStorage.getItem("username"),
+//         "email" : localStorage.getItem("email"),
+//         "fullname" : localStorage.getItem("fullname"),
+//         "gender" : localStorage.getItem("gender"),
+//         "address" : localStorage.getItem("address"),
+//         "birthday" : localStorage.getItem("birthday"),
+//         "phone" : localStorage.getItem("phone"),
+//         "status" : localStorage.getItem("status"),
+//     };
+// }
+
+const Storage = {getId,setId, setToken, getToken, getUserInfo, setUserInfo };
 export default Storage;
-

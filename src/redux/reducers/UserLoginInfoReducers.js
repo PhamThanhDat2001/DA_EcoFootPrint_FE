@@ -1,8 +1,9 @@
+import storage from "../../storage/storage.js";
 import * as types from "../constants";
 
 const initialState = {
-  userInfo: {},
-  token: ""
+  token: storage.getToken(),
+  userInfo: storage.getUserInfo()
 };
 
 export default function reducer(state = initialState, actions) {
@@ -17,7 +18,7 @@ export default function reducer(state = initialState, actions) {
         ...state,
         token: actions.payload
       };
-   
+
     default:
       return state;
   }

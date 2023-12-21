@@ -8,7 +8,10 @@ import Loginapi from '../api/signinApi';
 import '../css/signup.css';
 import {setUserLoginInfo,setTokenInfo} from '../redux/actions/UserLoginInfoActions.js'
 import { connect } from 'react-redux';
-// import {WithRouter} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { redirect } from "react-router-dom";
+
 import {
   Modal,
   ModalBody,
@@ -20,10 +23,18 @@ import { Link } from 'react-router-dom';
 import Storage from '../storage/storage.js';
 import Aler from './test.jsx';
 const Signin = (props) => {
+  const navigate = useNavigate();
   const [isopenModal, setOpenModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [email, setEmail] = useState("");
   const [isDisableButtonResend, setDisableButtonResend] = useState(false); 
+
+
+  // const handleButtonClick = () => {
+  //   // Use history.push to navigate to a new page
+  //   history.push("http://localhost:5173/");
+  // };
+
   const handleModalClose = () => {
     setOpenModal(false);
     // Thực hiện các xử lý khác khi modal đóng
@@ -44,7 +55,7 @@ const Signin = (props) => {
       <img src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" />
       <h1 className='slogan'>ECOFOOTPRINT - DẤU CHÂN SINH THÁI</h1>
     </div>
-    
+
   <Formik
     initialValues={
       {
@@ -88,6 +99,24 @@ const Signin = (props) => {
               console.log('1')
             }else{
               setShowAlert(false);
+
+              // const user = {
+              //   "username": result.username,
+              //   "email": result.email,
+              //   "fullname": result.fullname,
+              //   "gender": result.gender,
+              //   "address": result.address,
+              //   "birthday": result.birthday,
+              //   "phone": result.phone,
+              //   "status": result.status
+              // };
+              
+              //  Storage.setToken(result.token)
+              // Storage.setUserInfo(user);
+
+              //   props.setTokenInfo(result.token);
+              //   props.setUserLoginInfo(user)
+
               Storage.setToken(result.token)
               Storage.setUserInfo(
                 result.username,
@@ -109,10 +138,10 @@ const Signin = (props) => {
                   result.birthday,
                   result.phone,
                   result.status)
-            }
-
-
-            ;
+            };
+            // history.push("http://localhost:5173/");
+            //  redirect("http://localhost:5173/");
+            navigate("/");
         } catch (error) {
           console.log(error);
           if (error.response && error.response.status === 401) {
@@ -189,9 +218,10 @@ const Signin = (props) => {
     
         </div>
           <ErrorMessage name="confirmPassword" />
-        <Button type="primary" htmlType="submit" disabled={isSubmitting}>
+        
+        <Button  type="primary" htmlType="submit" disabled={isSubmitting}  >
           Đăng nhập
-        </Button>
+        </Button> 
         <div className="form-links">
         <Link to="/signup">Đăng ký</Link>
         <Link to="/ResetPassword">Quên mật khẩu</Link>
@@ -219,7 +249,7 @@ const Signin = (props) => {
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button color="secondary" onClick={resenEmailToActive} disabled={isDisableButtonResend}>
+                <Button color="secondary"  onClick={resenEmailToActive} disabled={isDisableButtonResend}>
                   Gửi lại
                 </Button>
                 {/* <Button color="primary" onClick={() => setOpenModal(false)}> */}
@@ -229,8 +259,10 @@ const Signin = (props) => {
                 </Button>
               </ModalFooter>
             </Modal>
+            
   </>
 
 )};
 // export default Signin;
-export default connect(null, { setUserLoginInfo, setTokenInfo})(Signin);
+// export default connect(null, { setUserLoginInfo, setTokenInfo})(Signin);
+export default (connect(null, { setUserLoginInfo, setTokenInfo })(Signin));

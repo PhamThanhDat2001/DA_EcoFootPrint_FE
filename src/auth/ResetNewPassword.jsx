@@ -148,7 +148,7 @@ const ResetPassword = () => {
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Link className="linh" color="secondary"  to="/dang-nhap" disabled={isDisableButtonResend}>
+                <Link className="linh" color="secondary"  to="/signin" disabled={isDisableButtonResend}>
                  Đăng nhập
                 </Link>
                 <Button    color="primary"

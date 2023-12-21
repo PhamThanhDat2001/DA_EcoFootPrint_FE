@@ -1,0 +1,51 @@
+/* Add your custom styles here */
+
+/* ProfileDetails component styles */
+.card {
+    margin-bottom: 20px;
+  }
+  
+  .cardBody {
+    padding: 20px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .btn-sm {
+    margin-right: 5px;
+  }
+  
+  /* Activities component styles */
+  .cardActions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .cardActions a {
+    color: #000; /* Change the color as needed */
+  }
+  
+  .cardActions a:hover {
+    color: #007bff; /* Change the color as needed */
+  }
+  
+  .media {
+    margin-bottom: 20px;
+  }
+  
+  hr {
+    margin: 20px 0;
+  }
+  
+  /* Adjust other styles as needed */
+  
+  /* Profile component styles */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
