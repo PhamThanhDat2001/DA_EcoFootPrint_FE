@@ -1,0 +1,60 @@
+/* VideoComponent.css */
+.video-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .video-wrapper {
+    margin-right: 20px; /* Khoảng cách giữa video và văn bản */
+  }
+  
+  .text-introduction {
+    max-width: 400px; /* Độ rộng tối đa của văn bản */
+  }
+
+
+
+
+  /* education.css */
+
+.video-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .video-wrapper {
+    margin-right: 20px;
+  }
+  
+  .text-introduction {
+    max-width: 400px;
+  }
+  
+  .cacbaibao {
+    margin-top: 30px;
+  }
+  
+  .baibao1,
+  .baibao2,
+  .baibao3 {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .solieuthongke {
+    margin-top: 30px;
+  }
+  
+  .solieuthongke div {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .solieuthongke img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  

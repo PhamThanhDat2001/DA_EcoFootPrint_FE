@@ -175,7 +175,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-        <img src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" className="anh1" />
+        <img style={{ marginLeft: '15px' }} src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" className="anh1" />
           {/* <IconButton
             size="large"
             edge="start"
@@ -184,8 +184,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton> */}
-          {/* <Typography
+          </IconButton>
+          <Typography
             variant="h6"
             noWrap
             component="div"
@@ -193,7 +193,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           >
             MUI
           </Typography> */}
-          {/* <Search>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -201,10 +201,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
-          </Search> */}
+          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" style={{ marginRight: '15px' }}>
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
@@ -213,6 +213,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              style={{ marginRight: '15px' }}
             >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
@@ -226,6 +227,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              style={{ marginRight: '8px' }}
             >
               <AccountCircle />
             </IconButton>

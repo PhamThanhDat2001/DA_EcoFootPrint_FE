@@ -1,0 +1,117 @@
+/* Define styles for the Dashboard component */
+/* You can adjust these styles based on your design preferences */
+/* Styles for info1 section */
+.info1 {
+    text-align: center;
+  }
+  
+  .anh1info1 {
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    max-width: 50%; /* Make sure the image doesn't overflow its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .anh1info1 + a {
+    display: block; /* Ensure the anchor tag is displayed as a block element */
+    font-size: 18px; /* Adjust the font size to your preference */
+    color: #333; /* Set the color to your preference */
+    margin-top: 10px; /* Add margin at the top for spacing */
+    text-decoration: none; /* Remove underline from the link */
+  }
+  
+  h6 {
+    font-size: 14px;
+    color: #555; /* Set the color to your preference */
+    margin-top: 10px; /* Add margin at the top for spacing */
+  }
+  /* Anchor (link) styles */
+.info1 a,
+.info2 a{
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.info1 a:hover,
+.info2 a:hover,
+.info3 a:hover {
+  /* text-decoration: underline; */
+  color: #007bff;
+}
+.info1,
+.info2,
+.info3 {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  margin-top: 20px;
+}
+
+/* Styles for each info section */
+.info1,
+.info2,
+.info3 {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.environment-info {
+  text-align: center;
+  margin-right: 100px;
+}
+
+  
+  /* info2 */
+  
+  .anh1info2 {
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    max-width: 300px; /* Make sure the image doesn't overflow its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .anh2info2 {
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    max-width: 300px; /* Make sure the image doesn't overflow its container */
+    height: 226px; /* Maintain aspect ratio */
+
+  }
+/* info3 */
+  .info3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .div1info3,
+  .div2info3,
+  .div3info3,
+  .div4info3,
+  .div5info3 {
+    display: flex;
+    align-items: center;
+  }
+  .div1info3 > a ,
+  .div2info3 > a ,
+  .div3info3 > a ,
+  .div4info3 > a ,
+  .div5info3 > a {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color from parent */
+  }
+  .anh1info3,
+  .anh2info3,
+  .anh3info3,
+  .anh4info3,
+  .anh5info3 {
+    max-width: 170px; /* Adjust the max-width of the image as needed */
+    height: auto;
+    margin-right: 10px; /* Add margin between image and text */
+    margin-bottom: 10px; 
+
+  }
+  /* Add more styles as needed */
+  
