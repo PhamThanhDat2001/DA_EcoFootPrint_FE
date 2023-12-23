@@ -1,0 +1,95 @@
+/* Add this CSS to your diary.css file */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .tag-add-new {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  .ant-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  /* Style for the "Action" column */
+  .ant-table-thead th:nth-child(4),
+  .ant-table-tbody td:nth-child(4) {
+    width: 15%;
+    text-align: center;
+  }
+  
+  /* Add space between "Reload" and "Delete" icons */
+  .ant-table-action-space {
+    margin-right: 8px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 767px) {
+    .ant-table-thead th:nth-child(1),
+    .ant-table-tbody td:nth-child(1),
+    .ant-table-thead th:nth-child(2),
+    .ant-table-tbody td:nth-child(2),
+    .ant-table-thead th:nth-child(3),
+    .ant-table-tbody td:nth-child(3),
+    .ant-table-thead th:nth-child(4),
+    .ant-table-tbody td:nth-child(4) {
+      width: 100%;
+    }
+  
+    .tag-add-new {
+      text-align: left;
+    }
+  }
+
+
+
+
+  /* Add this CSS to your existing stylesheet or create a new one */
+
+/* Style for the modal content */
+.ant-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the labels */
+label {
+  margin-bottom: 8px;
+}
+
+/* Style for the input fields */
+input,
+.ant-picker-input > input {
+  padding: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Style for the date picker */
+.ant-picker {
+  width: 100%;
+}
+
+/* Style for the modal footer */
+.ant-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Optional: Adjust the modal width */
+.ant-modal {
+  max-width: 400px;
+}
+
+  

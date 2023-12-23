@@ -1,8 +1,8 @@
-#header {
+/* #header {
     background-color: #80f880;
     color: #fff;
-    padding: 10px;
-  }
+   
+  } */
 
   .navleft {
     display: flex;
@@ -261,7 +261,7 @@ html {
   
   #detail {
     flex: 1;
-    padding: 2rem 4rem;
+    padding: 1rem 2rem;
     width: 100%;
   }
   

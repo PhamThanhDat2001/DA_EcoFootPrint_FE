@@ -19,6 +19,10 @@ import WithAuth from './HOC/withAuth'
 import Profile from './components/profile.jsx'
 import Info from './components/info.jsx'
 import Changepass from './components/changepass.jsx'
+import Dashboard from './pages/dashboard.jsx'
+import Education from './pages/education.jsx'
+import Question from './pages/question.jsx'
+import Diary from './pages/diary.jsx'
 
 // const AuthenticatedRoot = withAuth(class Root extends React.Component {
 //   render() {
@@ -39,11 +43,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "trangchu",
-        element:<h2>trang chu</h2>,
+        element:<Dashboard/>,
       },
       {
         path: "nhatkyhoatdong",
-        element:<h2>nhật ký</h2>,
+        element:<Diary/>,
       },
       {
         path: "tinhtoan",
@@ -51,11 +55,11 @@ const router = createBrowserRouter([
       },
       {
         path: "noidunggiaoduc",
-        element:<h2>nội dung dh</h2>,
+        element:<Education/>,
       },
       {
         path: "congdong",
-        element:<h2>Cộng đồngs</h2>,
+        element:<Question/>,
       },
     
     ],
