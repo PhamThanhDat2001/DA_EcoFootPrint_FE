@@ -23,6 +23,7 @@ import Dashboard from './pages/dashboard.jsx'
 import Education from './pages/education.jsx'
 import Question from './pages/question.jsx'
 import Diary from './pages/diary.jsx'
+import Calculate from './pages/calculate.jsx'
 
 // const AuthenticatedRoot = withAuth(class Root extends React.Component {
 //   render() {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "tinhtoan",
-        element:<h2>Tính toán</h2>,
+        element:<Calculate/>,
       },
       {
         path: "noidunggiaoduc",

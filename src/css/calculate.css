@@ -1,0 +1,39 @@
+/* calculate.css */
+
+.divbutton {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+  }
+  
+  .divbutton1{
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .divbutton2 {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  .buttonn {
+    width: 100%; /* Make input fields take up the full width */
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Include padding in the total width */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
+  }
+  
+  .buttonn:hover {
+    background-color: #45a049;
+  }
+  
+  .divtable {
+    display: flex;
+    justify-content: center;
+  }
+  
