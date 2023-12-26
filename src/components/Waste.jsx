@@ -13,6 +13,13 @@ import moment from 'moment';
 
 const Waste = () => {
     const [energyConsumption, setConsumption] = useState("");
+    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+      date: null,
+      wasteType: '',
+      amount: '',
+      unit: '',
+      description: '',
+    });
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
@@ -42,27 +49,65 @@ const Waste = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date,wasteType,amount,unit,description) => {
+  const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description);
+  setUpdateInfo(Info);
+
+}
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
 
     
 <Label>Ngày</Label>
-      <DatePicker
+      {/* <DatePicker
         value={selectedDate ? moment(selectedDate) : null}
         onChange={(date, dateString) => setSelectedDate(dateString)}
         format="YYYY-MM-DD" // Specify the desired date format
-      />
-    <Label>Loại chất thải</Label>
-    <Input value={energyConsumption.wasteType} />
+      /> */}
+     <DatePicker
+  value={selectedDate ? moment(selectedDate) : null}
+  onChange={(date, dateString) => {
+    console.log('Selected Date:', dateString);
+    setSelectedDate(dateString);
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      date: dateString,
+    });
+  }}
+  format="YYYY-MM-DD"
+/>
+
+    <Label>Loại chất thải </Label>
+    <Input value={energyConsumption.wasteType}   onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      wasteType: e.target.value,
+    })
+  } />
     <Label>Số lượng chất thải</Label>
-    <Input value={energyConsumption.amount} />
+    <Input value={energyConsumption.amount}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      amount: e.target.value,
+    })
+  }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit} />
+    <Input value={energyConsumption.unit}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      unit: e.target.value,
+    })
+  }/>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description} />
+<    Input value={energyConsumption.description}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      description: e.target.value,
+    })
+  }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" >
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.wasteType,energyConsumptionAdd.amount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Lưu
 </Button>
   {/* </div> */}

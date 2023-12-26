@@ -13,6 +13,13 @@ import moment from 'moment';
 
 const FoodConsumption = () => {
     const [energyConsumption, setConsumption] = useState("");
+    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+      date: null,
+      foodItem: '',
+      quantity: '',
+      unit: '',
+      description: '',
+    });
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
@@ -42,27 +49,65 @@ const FoodConsumption = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date,foodItem,quantity,unit,description) => {
+  const Info = await FootprintApi.createFoodConsumption(date,foodItem,quantity,unit,description);
+  setUpdateInfo(Info);
+
+}
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
 
     
 <Label>Ngày</Label>
-      <DatePicker
+      {/* <DatePicker
         value={selectedDate ? moment(selectedDate) : null}
         onChange={(date, dateString) => setSelectedDate(dateString)}
         format="YYYY-MM-DD" // Specify the desired date format
-      />
+      /> */}
+     <DatePicker
+  value={selectedDate ? moment(selectedDate) : null}
+  onChange={(date, dateString) => {
+    console.log('Selected Date:', dateString);
+    setSelectedDate(dateString);
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      date: dateString,
+    });
+  }}
+  format="YYYY-MM-DD"
+/>
+
     <Label>Loại thực phẩm</Label>
-    <Input value={energyConsumption.foodItem} />
+    <Input value={energyConsumption.foodItem}   onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      foodItem: e.target.value,
+    })
+  } />
     <Label>Số lượng tiêu thụ</Label>
-    <Input value={energyConsumption.quantity} />
+    <Input value={energyConsumption.quantity}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      quantity: e.target.value,
+    })
+  }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit} />
+    <Input value={energyConsumption.unit}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      unit: e.target.value,
+    })
+  }/>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description} />
+<    Input value={energyConsumption.description}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      description: e.target.value,
+    })
+  }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" >
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.foodItem,energyConsumptionAdd.quantity,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Lưu
 </Button>
   {/* </div> */}
@@ -266,5 +311,6 @@ const FoodConsumption = () => {
   </div>
   
 )};
+
 
 export default FoodConsumption;

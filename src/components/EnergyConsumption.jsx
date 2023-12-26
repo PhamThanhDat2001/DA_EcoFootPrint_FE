@@ -49,6 +49,11 @@ const EnergyConsumption = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date,energyType,consumption,unit,description) => {
+  const Info = await FootprintApi.create(date,energyType,consumption,unit,description);
+  setUpdateInfo(Info);
+
+}
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -102,7 +107,7 @@ const EnergyConsumption = () => {
     })
   }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd)  } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.energyType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Lưu
 </Button>
   {/* </div> */}
