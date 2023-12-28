@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker,Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +14,7 @@ import {  useNavigate } from 'react-router-dom';
 import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
-const Waste = () => {
+const Waste = ({onWasteDataChange}) => {
     const [energyConsumption, setConsumption] = useState("");
     const [energyConsumptionAdd, setEnergyConsumption] = useState({
       date: null,
@@ -30,6 +33,7 @@ const Waste = () => {
      
         const result = await FootprintApi.getWasteByDate(date);
         setConsumption(result);
+        onWasteDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
@@ -50,6 +54,12 @@ const Waste = () => {
 
 }
 const add = async (date,wasteType,amount,unit,description) => {
+  const isDuplicate = await FootprintApi.existsBydateWaste(date);
+
+  if (isDuplicate) {
+    console.log("Duplicated date! Cannot add duplicate entry.");
+    return;
+  }
   const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description);
   setUpdateInfo(Info);
 
@@ -108,7 +118,7 @@ const add = async (date,wasteType,amount,unit,description) => {
   }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.wasteType,energyConsumptionAdd.amount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
-  Lưu
+  Thêm
 </Button>
   {/* </div> */}
 

@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker,Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +13,7 @@ import {  useNavigate } from 'react-router-dom';
 import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
-const WaterConsumption = () => {
+const WaterConsumption = ({ onWaterConsumptionDataChange}) => {
     const [energyConsumption, setConsumption] = useState("");
     const [energyConsumptionAdd, setEnergyConsumption] = useState({
       date: null,
@@ -30,6 +32,8 @@ const WaterConsumption = () => {
      
         const result = await FootprintApi.getWaterConsumptionByDate(date);
         setConsumption(result);
+        // Send the fetched data to the parent component
+        onWaterConsumptionDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
@@ -50,10 +54,29 @@ const WaterConsumption = () => {
 
 }
 const add = async (date,usageType,consumption,unit,description) => {
+  const isDuplicate = await FootprintApi.existsBydateWater(date);
+
+  if (isDuplicate) {
+    console.log("Duplicated date! Cannot add duplicate entry.");
+    return;
+  }
+
   const Info = await FootprintApi.createWaterConsumption(date,usageType,consumption,unit,description);
   setUpdateInfo(Info);
-
+  
 }
+// const handleInput = (e) => {
+//   const { name, value } = e.target;
+//   setEnergyConsumption((prevValues) => ({
+//     ...prevValues,
+//     [name]: value,
+//   }));
+//   onInputChange(name, value);
+// };
+
+
+  
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -74,6 +97,7 @@ const add = async (date,usageType,consumption,unit,description) => {
       ...energyConsumptionAdd,
       date: dateString,
     });
+    
   }}
   format="YYYY-MM-DD"
 />
@@ -86,12 +110,18 @@ const add = async (date,usageType,consumption,unit,description) => {
     })
   } />
     <Label>Số lượng nước tiêu thụ</Label>
-    <Input value={energyConsumption.consumption}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
-      consumption: e.target.value,
-    })
-  }/>
+    <Input
+        value={energyConsumption.consumption}
+        onChange={(e) => {
+          setEnergyConsumption({
+            ...energyConsumptionAdd,
+            consumption: e.target.value,
+          });
+
+          // Send the updated consumption value to the parent component
+    
+        }}
+      />
     <Label>Đơn vị đo lường</Label>
     <Input value={energyConsumption.unit}  onChange={(e) =>
     setEnergyConsumption({
@@ -108,7 +138,7 @@ const add = async (date,usageType,consumption,unit,description) => {
   }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.usageType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
-  Lưu
+  Thêm
 </Button>
   {/* </div> */}
 

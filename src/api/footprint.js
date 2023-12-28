@@ -17,7 +17,33 @@ const urlgetGreenEnergyUsageById = "/greenenergyusage"
 const urlTransportation = "/transportation"
 const urlWaste = "/waste"
 const urlWaterConsumption = "/water"
+
+const urlcheckdateEnegy = "/energyconsumptiondate"
+const urlcheckdateFood = "/foodconsumptiondate"
+const urlcheckdateGreen = "/greenenergyusagedate"
+const urlcheckdateTransportation = "/transportationdate"
+const urlcheckdateWaste = "/wastedate"
+const urlcheckdateWater = "/waterconsumptiondate"
+const existsBydateEnegy = (date) => {
+    return Api.get(`${urlcheckdateEnegy}/${date}`);
+};
+const existsBydateFood = (date) => {
+    return Api.get(`${urlcheckdateFood}/${date}`);
+};
+const existsBydateGreen = (date) => {
+    return Api.get(`${urlcheckdateGreen}/${date}`);
+};
+const existsBydateTransportation = (date) => {
+    return Api.get(`${urlcheckdateTransportation}/${date}`);
+};
+const existsBydateWaste = (date) => {
+    return Api.get(`${urlcheckdateWaste}/${date}`);
+};
+const existsBydateWater = (date) => {
+    return Api.get(`${urlcheckdateWater}/${date}`);
+};
 // EnegyConsumption
+
 const getEnegyConsumptionByDate = (date) => {
  
     return Api.get(`${urlgetEnegyConsumptionByDate}/${date}`);
@@ -231,11 +257,10 @@ const updateWaterConsumption = (id, date,usageType,consumption,unit,description)
 // Waste
 
 // export
-const FootprintApi = {updateEnegyConsumption,getEnegyConsumptionById,getEnegyConsumptionByDate,create,
-                getFoodConsumptionByDate,getFoodConsumptionById,updateFoodConsumption,createFoodConsumption,
-                getGreenEnergyUsageByDate,getGreenEnergyUsageById,updateGreenEnergyUsage,createGreenEnergyUsage,
-                getTransportationByDate,getTransportationById,updateTransportation,createTransportation,createWaste,
-                getWasteByDate,getWasteById,updateWaste,
-                getWaterConsumptionByDate,getWaterConsumptionById,updateWaterConsumption,createWaterConsumption }
+const FootprintApi = {updateEnegyConsumption,getEnegyConsumptionById,getEnegyConsumptionByDate,create,existsBydateEnegy,
+                getFoodConsumptionByDate,getFoodConsumptionById,updateFoodConsumption,createFoodConsumption,existsBydateFood,
+                getGreenEnergyUsageByDate,getGreenEnergyUsageById,updateGreenEnergyUsage,createGreenEnergyUsage,existsBydateGreen,
+                getTransportationByDate,getTransportationById,updateTransportation,createTransportation,existsBydateTransportation,createWaste,
+                getWasteByDate,getWasteById,updateWaste,existsBydateWaste,
+                getWaterConsumptionByDate,getWaterConsumptionById,updateWaterConsumption,createWaterConsumption,existsBydateWater }
 export default FootprintApi;
-
