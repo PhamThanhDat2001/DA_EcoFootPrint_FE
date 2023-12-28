@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker,Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,8 +13,15 @@ import {  useNavigate } from 'react-router-dom';
 import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
-const GreenEnergyUsage = () => {
+const GreenEnergyUsage = ({onGreenEnergyUsageDataChange}) => {
     const [energyConsumption, setConsumption] = useState("");
+    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+      date: null,
+      energySource: '',
+      usageAmount: '',
+      unit: '',
+      description: '',
+    });
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
@@ -23,6 +32,7 @@ const GreenEnergyUsage = () => {
      
         const result = await FootprintApi.getGreenEnergyUsageByDate(date);
         setConsumption(result);
+        onGreenEnergyUsageDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
@@ -42,28 +52,72 @@ const GreenEnergyUsage = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date,energySource,usageAmount,unit,description) => {
+  const isDuplicate = await FootprintApi.existsBydateGreen(date);
+
+  if (isDuplicate) {
+    console.log("Duplicated date! Cannot add duplicate entry.");
+    return;
+  }
+  const Info = await FootprintApi.createGreenEnergyUsage(date,energySource,usageAmount,unit,description);
+  setUpdateInfo(Info);
+
+}
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
 
     
 <Label>Ngày</Label>
-      <DatePicker
+      {/* <DatePicker
         value={selectedDate ? moment(selectedDate) : null}
         onChange={(date, dateString) => setSelectedDate(dateString)}
         format="YYYY-MM-DD" // Specify the desired date format
-      />
+      /> */}
+     <DatePicker
+  value={selectedDate ? moment(selectedDate) : null}
+  onChange={(date, dateString) => {
+    console.log('Selected Date:', dateString);
+    setSelectedDate(dateString);
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      date: dateString,
+    });
+  }}
+  format="YYYY-MM-DD"
+/>
+
     <Label>Loại nguồn năng lượng xanh</Label>
-    <Input value={energyConsumption.energySource} />
+    <Input value={energyConsumption.energySource}   onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      energySource: e.target.value,
+    })
+  } />
     <Label>Số lượng năng lượng sử dụng</Label>
-    <Input value={energyConsumption.usageAmount} />
+    <Input value={energyConsumption.usageAmount}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      usageAmount: e.target.value,
+    })
+  }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit} />
+    <Input value={energyConsumption.unit}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      unit: e.target.value,
+    })
+  }/>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description} />
+<    Input value={energyConsumption.description}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      description: e.target.value,
+    })
+  }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" >
-  Lưu
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.energySource,energyConsumptionAdd.usageAmount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+  Thêm
 </Button>
   {/* </div> */}
 
@@ -162,7 +216,7 @@ const GreenEnergyUsage = () => {
         </div>
         <div style={{ marginBottom: '10px' }}>
         <div>
-          <label htmlFor="">Loại nguồn năng lượng xanh: </label>
+          <label htmlFor="">Loại thực phẩm: </label>
           </div>
         <FastField
         label="sse"
@@ -182,7 +236,7 @@ const GreenEnergyUsage = () => {
         </div>
         <div style={{ marginBottom: '10px' }}>
         <div>
-          <label htmlFor="">Số lượng năng lượng sử dụng: </label>
+          <label htmlFor="">Số lượng tiêu thụ: </label>
           </div>
         <FastField
         label="sse"
@@ -266,6 +320,8 @@ const GreenEnergyUsage = () => {
   </div>
   
 )};
+
+
 
 
 

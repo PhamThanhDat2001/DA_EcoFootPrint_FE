@@ -10,8 +10,9 @@ import { toastr } from 'react-redux-toastr';
 import {  useNavigate } from 'react-router-dom';
 import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
+import axios from 'axios';
 
-const EnergyConsumption = () => {
+const EnergyConsumption = ({onEnergyConsumptionDataChange}) => {
     const [energyConsumption, setConsumption] = useState("");
     const [energyConsumptionAdd, setEnergyConsumption] = useState({
       date: null,
@@ -30,6 +31,7 @@ const EnergyConsumption = () => {
      
         const result = await FootprintApi.getEnegyConsumptionByDate(date);
         setConsumption(result);
+        onEnergyConsumptionDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
@@ -49,6 +51,26 @@ const EnergyConsumption = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date, energyType, consumption, unit, description) => {
+  // Kiểm tra xem đã có thông tin với date đã cho chưa
+  const isDuplicate = await FootprintApi.existsBydateEnegy(date);
+
+  if (isDuplicate) {
+    console.log("Duplicated date! Cannot add duplicate entry.");
+    return;
+  }
+
+  // Nếu không có thông tin nào với date đã cho, thêm mới thông tin
+  const newInfo = await FootprintApi.create(date, energyType, consumption, unit, description);
+  setUpdateInfo(newInfo);
+};
+
+// const add = async (date,energyType,consumption,unit,description) => {
+//   const Info = await FootprintApi.create(date,energyType,consumption,unit,description);
+//   setUpdateInfo(Info);
+
+// }
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -102,8 +124,8 @@ const EnergyConsumption = () => {
     })
   }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd)  } > 
-  Lưu
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.energyType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+  Thêm
 </Button>
   {/* </div> */}
 

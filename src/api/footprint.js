@@ -1,6 +1,6 @@
 import Api from './Api';
 
-const url = "/username";
+
 
 const urlupdateEnegyConsumption = "/energyconsumption";
 const urlgetEnegyConsumptionByDate = "/energyconsumption"
@@ -17,7 +17,33 @@ const urlgetGreenEnergyUsageById = "/greenenergyusage"
 const urlTransportation = "/transportation"
 const urlWaste = "/waste"
 const urlWaterConsumption = "/water"
+
+const urlcheckdateEnegy = "/energyconsumptiondate"
+const urlcheckdateFood = "/foodconsumptiondate"
+const urlcheckdateGreen = "/greenenergyusagedate"
+const urlcheckdateTransportation = "/transportationdate"
+const urlcheckdateWaste = "/wastedate"
+const urlcheckdateWater = "/waterconsumptiondate"
+const existsBydateEnegy = (date) => {
+    return Api.get(`${urlcheckdateEnegy}/${date}`);
+};
+const existsBydateFood = (date) => {
+    return Api.get(`${urlcheckdateFood}/${date}`);
+};
+const existsBydateGreen = (date) => {
+    return Api.get(`${urlcheckdateGreen}/${date}`);
+};
+const existsBydateTransportation = (date) => {
+    return Api.get(`${urlcheckdateTransportation}/${date}`);
+};
+const existsBydateWaste = (date) => {
+    return Api.get(`${urlcheckdateWaste}/${date}`);
+};
+const existsBydateWater = (date) => {
+    return Api.get(`${urlcheckdateWater}/${date}`);
+};
 // EnegyConsumption
+
 const getEnegyConsumptionByDate = (date) => {
  
     return Api.get(`${urlgetEnegyConsumptionByDate}/${date}`);
@@ -38,9 +64,31 @@ const updateEnegyConsumption = (id, date,energyType,consumption,unit,description
     }
     return Api.put(`${urlupdateEnegyConsumption}/${id}`,body);
 }
+const create = (date,energyType,consumption,unit,description) =>{
+    const body ={
+        date: date,
+        energyType:energyType,
+        consumption:consumption,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlupdateEnegyConsumption,body);
+}
+
 // EnegyConsumption
 
 // FoodConsumption
+const createFoodConsumption = (date,foodItem,quantity,unit,description) =>{
+    const body ={
+        date: date,
+        foodItem:foodItem,
+        quantity:quantity,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlgetFoodConsumptionByDate,body);
+}
+
 const getFoodConsumptionByDate = (date) => {
  
     return Api.get(`${urlgetFoodConsumptionByDate}/${date}`);
@@ -67,6 +115,18 @@ const updateFoodConsumption = (id, date,foodItem,quantity,unit,description) =>{
 
 
 // GreenEnẻgy
+const createGreenEnergyUsage = (date,energySource,usageAmount,unit,description) =>{
+    const body ={
+        date: date,
+        energySource:energySource,
+        usageAmount:usageAmount,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlgetGreenEnergyUsageByDate,body);
+}
+
+
 const getGreenEnergyUsageByDate = (date) => {
  
     return Api.get(`${urlgetGreenEnergyUsageByDate}/${date}`);
@@ -91,6 +151,18 @@ const updateGreenEnergyUsage = (id, date,energySource,usageAmount,unit,descripti
 // GreenEnẻgy
 
 // Transportation
+const createTransportation = (date,transportMode,distance,unit,description) =>{
+    const body ={
+        date: date,
+        transportMode:transportMode,
+        distance:distance,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlTransportation,body);
+}
+
+
 const getTransportationByDate = (date) => {
  
     return Api.get(`${urlTransportation}/${date}`);
@@ -115,6 +187,17 @@ const updateTransportation = (id, date,transportMode,distance,unit,description) 
 // Transportation
 
 // Waste
+
+const createWaste = (date,wasteType,amount,unit,description) =>{
+    const body ={
+        date: date,
+        wasteType:wasteType,
+        amount:amount,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlWaste,body);
+}
 const getWasteByDate = (date) => {
  
     return Api.get(`${urlWaste}/${date}`);
@@ -138,7 +221,18 @@ const updateWaste = (id, date,wasteType,amount,unit,description) =>{
 }
 // Waste
 
-// Waste
+// WaterConsumption
+
+const createWaterConsumption = (date,usageType,consumption,unit,description) =>{
+    const body ={
+        date: date,
+        usageType:usageType,
+        consumption:consumption,
+        unit: unit,
+        description:description,
+    }
+    return Api.post(urlWaterConsumption,body);
+}
 const getWaterConsumptionByDate = (date) => {
  
     return Api.get(`${urlWaterConsumption}/${date}`);
@@ -163,11 +257,10 @@ const updateWaterConsumption = (id, date,usageType,consumption,unit,description)
 // Waste
 
 // export
-const FootprintApi = {updateEnegyConsumption,getEnegyConsumptionById,getEnegyConsumptionByDate,
-                getFoodConsumptionByDate,getFoodConsumptionById,updateFoodConsumption,
-                getGreenEnergyUsageByDate,getGreenEnergyUsageById,updateGreenEnergyUsage,
-                getTransportationByDate,getTransportationById,updateTransportation,
-                getWasteByDate,getWasteById,updateWaste,
-                getWaterConsumptionByDate,getWaterConsumptionById,updateWaterConsumption }
+const FootprintApi = {updateEnegyConsumption,getEnegyConsumptionById,getEnegyConsumptionByDate,create,existsBydateEnegy,
+                getFoodConsumptionByDate,getFoodConsumptionById,updateFoodConsumption,createFoodConsumption,existsBydateFood,
+                getGreenEnergyUsageByDate,getGreenEnergyUsageById,updateGreenEnergyUsage,createGreenEnergyUsage,existsBydateGreen,
+                getTransportationByDate,getTransportationById,updateTransportation,createTransportation,existsBydateTransportation,createWaste,
+                getWasteByDate,getWasteById,updateWaste,existsBydateWaste,
+                getWaterConsumptionByDate,getWaterConsumptionById,updateWaterConsumption,createWaterConsumption,existsBydateWater }
 export default FootprintApi;
-

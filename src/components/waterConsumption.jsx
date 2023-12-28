@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker,Input } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,8 +13,15 @@ import {  useNavigate } from 'react-router-dom';
 import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
-const WaterConsumption = () => {
+const WaterConsumption = ({ onWaterConsumptionDataChange}) => {
     const [energyConsumption, setConsumption] = useState("");
+    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+      date: null,
+      usageType: '',
+      consumption: '',
+      unit: '',
+      description: '',
+    });
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
@@ -23,6 +32,8 @@ const WaterConsumption = () => {
      
         const result = await FootprintApi.getWaterConsumptionByDate(date);
         setConsumption(result);
+        // Send the fetched data to the parent component
+        onWaterConsumptionDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
@@ -42,28 +53,92 @@ const WaterConsumption = () => {
   setUpdateInfo(Info);
 
 }
+const add = async (date,usageType,consumption,unit,description) => {
+  const isDuplicate = await FootprintApi.existsBydateWater(date);
+
+  if (isDuplicate) {
+    console.log("Duplicated date! Cannot add duplicate entry.");
+    return;
+  }
+
+  const Info = await FootprintApi.createWaterConsumption(date,usageType,consumption,unit,description);
+  setUpdateInfo(Info);
+  
+}
+// const handleInput = (e) => {
+//   const { name, value } = e.target;
+//   setEnergyConsumption((prevValues) => ({
+//     ...prevValues,
+//     [name]: value,
+//   }));
+//   onInputChange(name, value);
+// };
+
+
+  
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
 
     
 <Label>Ngày</Label>
-      <DatePicker
+      {/* <DatePicker
         value={selectedDate ? moment(selectedDate) : null}
         onChange={(date, dateString) => setSelectedDate(dateString)}
         format="YYYY-MM-DD" // Specify the desired date format
-      />
+      /> */}
+     <DatePicker
+  value={selectedDate ? moment(selectedDate) : null}
+  onChange={(date, dateString) => {
+    console.log('Selected Date:', dateString);
+    setSelectedDate(dateString);
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      date: dateString,
+    });
+    
+  }}
+  format="YYYY-MM-DD"
+/>
+
     <Label>Loại tiêu thụ nước</Label>
-    <Input value={energyConsumption.usageType} />
+    <Input value={energyConsumption.usageType}   onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      usageType: e.target.value,
+    })
+  } />
     <Label>Số lượng nước tiêu thụ</Label>
-    <Input value={energyConsumption.consumption} />
+    <Input
+        value={energyConsumption.consumption}
+        onChange={(e) => {
+          setEnergyConsumption({
+            ...energyConsumptionAdd,
+            consumption: e.target.value,
+          });
+
+          // Send the updated consumption value to the parent component
+    
+        }}
+      />
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit} />
+    <Input value={energyConsumption.unit}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      unit: e.target.value,
+    })
+  }/>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description} />
+<    Input value={energyConsumption.description}  onChange={(e) =>
+    setEnergyConsumption({
+      ...energyConsumptionAdd,
+      description: e.target.value,
+    })
+  }/>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
-    <Button type="primary" >
-  Lưu
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.usageType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+  Thêm
 </Button>
   {/* </div> */}
 
@@ -162,7 +237,7 @@ const WaterConsumption = () => {
         </div>
         <div style={{ marginBottom: '10px' }}>
         <div>
-          <label htmlFor="">Loại chất thải: </label>
+          <label htmlFor="">Loại tiêu thụ nước: </label>
           </div>
         <FastField
         label="sse"
@@ -182,7 +257,7 @@ const WaterConsumption = () => {
         </div>
         <div style={{ marginBottom: '10px' }}>
         <div>
-          <label htmlFor="">Số lượng chất thải: </label>
+          <label htmlFor="">Số lượng nước tiêu thụ: </label>
           </div>
         <FastField
         label="sse"
@@ -266,5 +341,6 @@ const WaterConsumption = () => {
   </div>
   
 )};
+
 
 export default WaterConsumption;
