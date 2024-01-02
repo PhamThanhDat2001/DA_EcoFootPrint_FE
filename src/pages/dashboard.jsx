@@ -1,5 +1,14 @@
+// import { useContext } from 'react';
 import '../css/dashboard.css'
 const Dashboard = () => {
+    // // Assuming you have a context or state that provides user information including the role
+    // // You may need to replace 'UserContext' with the actual context or state variable
+    // const userContext = useContext(UserContext);
+
+    // // Function to check if the user has the 'Admin' role
+    // const isAdmin = () => {
+    //     return userContext.user && userContext.user.role === 'Admin';
+    // };
     return (<>
         <div>
             <div className="environment-info">
@@ -12,7 +21,10 @@ const Dashboard = () => {
                     <h4>                    Giải thưởng Chính của VinFuture 2023: Phát minh về pin mặt trời và lưu trữ bằng pin Lithium-ion
                     </h4>                    <h6>Tối 20/12, tại Hà Nội, Giải thưởng Chính của Giải thưởng Khoa học, công nghệ thường niên toàn cầu VinFuture năm 2023 trị giá 3 triệu USD đã được trao cho 4 nhà khoa học với phát minh đột phá kiến tạo nền tảng bền vững cho năng lượng xanh thông qua việc sản xuất bằng pin mặt trời và lưu trữ bằng pin Lithium-ion.</h6>
                 </a>
-
+                <div>
+            <button>Thêm</button>
+             <button>Chỉnh sửa</button>
+            </div>
             </div>
             <div className="info2">
                 <div>
@@ -32,7 +44,10 @@ const Dashboard = () => {
                         <h6>Giải quyết ô nhiễm rác thải nhựa từ lâu luôn là vấn đề cấp bách không chỉ ở Việt Nam mà trên toàn thế giới. Ngoài việc nâng cao ý thức cộng đồng, trách nhiệm của mỗi cá nhân hạn chế sử dụng các sản phẩm nhựa một lần và túi nilon, tìm sản phẩm thay thế vẫn được đánh giá là “điểm chốt” để hướng đến mục tiêu bền vững.</h6>
                     </a>
                 </div>
-
+                <div>
+            <button>Thêm</button>
+             <button>Chỉnh sửa</button>
+            </div>
             </div>
             <div className="info3">
                 <div className="div1info3">
@@ -93,6 +108,10 @@ const Dashboard = () => {
                   </div>
                     </a>
                 </div>
+                <div>
+            <button>Thêm</button>
+             <button>Chỉnh sửa</button>
+            </div>
             </div>
         </div>
     </>)

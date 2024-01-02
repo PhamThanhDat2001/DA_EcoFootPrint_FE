@@ -139,12 +139,12 @@ const showSuccessNotification = (title, message) => {
         enableReinitialize
           initialValues={
             {
-              fullname:updateInfo && updateInfo.fullname !==undefined && updateInfo.fullname !== null ? updateInfo.fullname : '1',
-              gender:updateInfo && updateInfo.gender !==undefined && updateInfo.gender !== null? updateInfo.gender : '2',
-              address: updateInfo &&updateInfo.address !==undefined && updateInfo.address !== null? updateInfo.address : '3',
-              birthday:updateInfo && updateInfo.birthday !==undefined && updateInfo.birthday !== null? updateInfo.birthday : '4',  
-              phone: updateInfo &&updateInfo.phone !==undefined && updateInfo.phone !== null ? updateInfo.phone : '6',
-              avatarUrl:updateInfo && updateInfo.avatarUrl !==undefined && updateInfo.avatarUrl !== null? updateInfo.avatarUrl : '7'
+              fullname:updateInfo && updateInfo.fullname !==undefined && updateInfo.fullname !== null ? updateInfo.fullname : "Chưa cập nhật",
+              gender:updateInfo && updateInfo.gender !==undefined && updateInfo.gender !== null? updateInfo.gender : "Chưa cập nhật",
+              address: updateInfo &&updateInfo.address !==undefined && updateInfo.address !== null? updateInfo.address : "Chưa cập nhật",
+              birthday:updateInfo && updateInfo.birthday !==undefined && updateInfo.birthday !== null? updateInfo.birthday : "Chưa cập nhật",  
+              phone: updateInfo &&updateInfo.phone !==undefined && updateInfo.phone !== null ? updateInfo.phone : "Chưa cập nhật",
+              avatarUrl:updateInfo && updateInfo.avatarUrl !==undefined && updateInfo.avatarUrl !== null? updateInfo.avatarUrl : "Chưa cập nhật"
             }
           }
           validationSchema={
@@ -216,11 +216,11 @@ const showSuccessNotification = (title, message) => {
         name="fullname"
         type="text"
        
-        placeholder="Hãy nhập tài khoản"
+        placeholder="Hãy nhập họ và tên"
         rules={[
           {
             required: true,
-            message: 'Hãy nhập tài khoản!',
+            message: 'Hãy nhập họ và tên!',
           },
         ]}   
         
@@ -236,11 +236,11 @@ const showSuccessNotification = (title, message) => {
         name="gender"
         type="text"
        
-        placeholder="Hãy nhập tài khoản"
+        placeholder="Hãy nhập giới tính"
         rules={[
           {
             required: true,
-            message: 'Hãy nhập tài khoản!',
+            message: 'Hãy nhập giới tính!',
           },
         ]}   
         
@@ -256,11 +256,11 @@ const showSuccessNotification = (title, message) => {
         name="address"
         type="text"
        
-        placeholder="Hãy nhập tài khoản"
+        placeholder="Hãy nhập địa chỉ"
         rules={[
           {
             required: true,
-            message: 'Hãy nhập tài khoản!',
+            message: 'Hãy nhập địa chỉ!',
           },
         ]}   
         
@@ -276,11 +276,11 @@ const showSuccessNotification = (title, message) => {
         name="birthday"
         type="text"
        
-        placeholder="Hãy nhập tài khoản"
+        placeholder="Hãy nhập ngày sinh"
         rules={[
           {
             required: true,
-            message: 'Hãy nhập tài khoản!',
+            message: 'Hãy nhập ngày sinh!',
           },
         ]}   
         
@@ -295,11 +295,11 @@ const showSuccessNotification = (title, message) => {
         name="phone"
         type="text"
        
-        placeholder="Hãy nhập tài khoản"
+        placeholder="Hãy nhập số điện thoại"
         rules={[
           {
             required: true,
-            message: 'Hãy nhập tài khoản!',
+            message: 'Hãy nhập số điện thoại!',
           },
         ]}   
         

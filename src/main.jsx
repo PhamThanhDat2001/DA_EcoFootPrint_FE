@@ -25,6 +25,8 @@ import Question from './pages/question.jsx'
 import Diary from './pages/diary.jsx'
 import Calculate from './pages/calculate.jsx'
 
+import {Res} from './pages/charts.jsx'
+
 // const AuthenticatedRoot = withAuth(class Root extends React.Component {
 //   render() {
 //     return (
@@ -97,7 +99,12 @@ const router = createBrowserRouter([
   {
     path: '/changepass',
     element: <Changepass/>
+  },
+  {
+    path: '/charts',
+    element: <Res/>
   }
+
   
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

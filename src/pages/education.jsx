@@ -28,7 +28,7 @@ const Education =() =>{
     </div>
         </div>
 
-        <div>
+        {/* <div>
         <div className="video-container">
       <div className="video-wrapper">
         <iframe
@@ -46,7 +46,7 @@ const Education =() =>{
         <h6>Lắng nghe để thấu hiểu cuộc sống hơn và thức tỉnh hành động vì một ngày mai tốt đẹp hơn!</h6>
       </div>
     </div>
-        </div>
+        </div> */}
 
 
         <div>
