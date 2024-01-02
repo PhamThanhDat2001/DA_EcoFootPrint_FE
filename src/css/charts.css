@@ -1,0 +1,39 @@
+/* charts.css */
+/* charts.css */
+
+.chuyentrang {
+    cursor: pointer;
+    background-color: #3498db; 
+    color: #fff; 
+  
+    margin-top: 20px; 
+  
+  }
+  
+  /* Add any additional styles you need */
+  
+.all {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .bieudo {
+    flex: 1;
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+  
+  .ketqua {
+    flex: 1;
+  }
+  
+  .dauchan {
+    font-size: 18px; /* Adjust the font size as needed */
+    font-weight: bold;
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+  
+  .loikhuyen {
+    font-size: 16px; /* Adjust the font size as needed */
+    line-height: 1.4; /* Adjust the line height as needed */
+  }
+  

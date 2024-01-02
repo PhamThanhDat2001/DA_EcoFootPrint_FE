@@ -7,7 +7,7 @@ import FoodConsumption from '../components/FoodConsumption';
 import GreenEnergyUsage from '../components/GreenEnergyUsage';
 import Waste from '../components/Waste';
 import '../css/calculate.css'
-import { Chart } from './charts';
+import { useNavigate } from 'react-router-dom';
 
 
 const Calculate = () => {
@@ -18,9 +18,9 @@ const Calculate = () => {
   const [foodConsumptionData, setFoodConsumptionData] = useState(null);
   const [energyConsumptionData, setEnergyConsumptionData] = useState(null);
   const [wasteData, setWasteData] = useState(null);
-
-  const [showChart, setShowChart] = useState(false); // State to control the visibility of the Chart component
-
+  const navigate = useNavigate();
+  const [resulttong, setResulttong] = useState(null);
+  const [ketquabieudo, setKetquabieudo] = useState(null);
   const renderComponent = (componentNumber) => {
     switch (componentNumber) {
       case 1:
@@ -43,7 +43,33 @@ const Calculate = () => {
 
   const handleCalculate = () => {
     // Check for null or undefined values and handle them
-    const ketqua =
+  
+    // const ketquabieudo = {
+    //   waterConsumption: 0.3522 * (waterConsumptionData?.consumption ?? 0),
+    //   transportation: 0.1159 * (transportationData?.distance ?? 0),
+    //   greenEnergyUsage: 0.3382 * (greenEnergyUsageData?.usageAmount ?? 0),
+    //   foodConsumption: 0.1449 * (foodConsumptionData?.quantity ?? 0),
+    //   energyConsumption: 0.3382 * (energyConsumptionData?.consumption ?? 0),
+    //   waste: 0.1932 * (wasteData?.amount ?? 0),
+    // };
+    // console.log('bieudo:', ketquabieudo);
+
+    const waterConsumption= 0.3522 * (waterConsumptionData?.consumption ?? 0)
+    const transportation= 0.1159 * (transportationData?.distance ?? 0)
+    const greenEnergyUsage= 0.3382 * (greenEnergyUsageData?.usageAmount ?? 0)
+    const  foodConsumption= 0.1449 * (foodConsumptionData?.quantity ?? 0)
+    const energyConsumption= 0.3382 * (energyConsumptionData?.consumption ?? 0)
+    const waste= 0.1932 * (wasteData?.amount ?? 0)
+    // You can now use the 'result' object as needed
+    const ketquabieudo = {
+      waterConsumption,
+      transportation,
+      greenEnergyUsage,
+      foodConsumption,
+      energyConsumption,
+      waste,
+    };
+    const resulttong =
         0.3522 * (waterConsumptionData?.consumption ?? 0) +
         0.1159 * (transportationData?.distance ?? 0) +
         0.3382 * (greenEnergyUsageData?.usageAmount ?? 0) +
@@ -51,8 +77,12 @@ const Calculate = () => {
         0.3382 * (energyConsumptionData?.consumption ?? 0) +
         0.1932 * (wasteData?.amount ?? 0);
 
-    console.log('Result:', ketqua);
-    setShowChart(true);
+    console.log('tong1:', resulttong);
+    setResulttong(resulttong);
+    setKetquabieudo(ketquabieudo);
+
+    // Pass the calculated results as part of the state object in navigate
+    navigate('/charts', { state: { ketquabieudo, resulttong } });
   };
 
 
@@ -74,11 +104,9 @@ const Calculate = () => {
       <div className='divtable'>
         {currentComponent && renderComponent(currentComponent)}
         <div>
-          <button onClick={handleCalculate}>Tính toán</button>
+          <button onClick={handleCalculate} ketquabieudo={ketquabieudo}>Tính toán</button>
         </div>
-         <div>
-          {showChart && <Chart />} {/* Render Chart component if showChart is true */}
-        </div>
+      
       </div>
       </div>
 
