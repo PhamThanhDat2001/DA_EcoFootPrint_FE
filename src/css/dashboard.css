@@ -2,7 +2,10 @@
 /* You can adjust these styles based on your design preferences */
 /* Styles for info1 section */
 .info1 {
-    text-align: center;
+  display: flex;
+  flex-direction: column; /* Set flex direction to column */
+  text-align: center;
+  
   }
   
   .anh1info1 {
@@ -10,6 +13,7 @@
     margin: 0 auto; /* Center the image horizontally */
     max-width: 50%; /* Make sure the image doesn't overflow its container */
     height: auto; /* Maintain aspect ratio */
+    
   }
   
   .anh1info1 + a {

@@ -126,7 +126,9 @@ const Signin = (props) => {
                 result.address,
                 result.birthday,
                 result.phone,
-                result.status);
+                result.status,
+                result.role,
+                result.avatarUrl);
 
                 props.setTokenInfo(result.token);
                 props.setUserLoginInfo(
@@ -137,7 +139,9 @@ const Signin = (props) => {
                   result.address,
                   result.birthday,
                   result.phone,
-                  result.status)
+                  result.status,
+                  result.role,
+                result.avatarUrl)
             };
             // history.push("http://localhost:5173/");
             //  redirect("http://localhost:5173/");
