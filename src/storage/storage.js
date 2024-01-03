@@ -16,7 +16,7 @@ const getId = () => {
     return localStorage.getItem('id');
 };
 
-const setUserInfo = (username,email,fullname,gender,address,birthday,phone,status) => {
+const setUserInfo = (username,email,fullname,gender,address,birthday,phone,status,role,avatarUrl) => {
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
     localStorage.setItem('fullname', fullname);
@@ -25,6 +25,8 @@ const setUserInfo = (username,email,fullname,gender,address,birthday,phone,statu
     localStorage.setItem('birthday', birthday);
     localStorage.setItem('phone', phone);
     localStorage.setItem('status', status);
+    localStorage.setItem('role', role);
+    localStorage.setItem('avatarUrl', avatarUrl);
 };
 
 
@@ -39,6 +41,8 @@ const getUserInfo = () => {
         "birthday" : localStorage.getItem("birthday"),
         "phone" : localStorage.getItem("phone"),
         "status" : localStorage.getItem("status"),
+        "role" : localStorage.getItem("role"),
+        "avatarUrl" : localStorage.getItem("avatarUrl"),
     };
 }
 // const setUserInfo = (id,username,email,fullname,gender,address,birthday,phone,status) => {
