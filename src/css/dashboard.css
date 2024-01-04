@@ -66,56 +66,83 @@
 
   
   /* info2 */
-  
-  .anh1info2 {
-    display: block; /* Ensure the image is treated as a block element */
-    margin: 0 auto; /* Center the image horizontally */
-    max-width: 300px; /* Make sure the image doesn't overflow its container */
-    height: auto; /* Maintain aspect ratio */
-  }
-  .anh2info2 {
-    display: block; /* Ensure the image is treated as a block element */
-    margin: 0 auto; /* Center the image horizontally */
-    max-width: 300px; /* Make sure the image doesn't overflow its container */
-    height: 226px; /* Maintain aspect ratio */
+  /* Add this CSS code to your existing stylesheet or create a new CSS file */
 
-  }
+.info2 {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap onto a new line when there's not enough space */
+  justify-content: space-around;
+}
+
+.info2 .infosecond {
+  width: calc(33.33% - 20px); /* Adjust the width as needed */
+  margin-bottom: 20px;
+}
+
+.info2 .infosecond img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+  /* .anh2info2 {
+    display: block; 
+    margin: 0 auto; 
+    max-width: 300px; 
+    max-height: 226px; 
+
+  } */
 /* info3 */
-  .info3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
 
-  .div1info3,
-  .div2info3,
-  .div3info3,
-  .div4info3,
-  .div5info3 {
-    display: flex;
+.info3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoother {
+  display: flex;
     align-items: center;
-  }
-  .div1info3 > a ,
-  .div2info3 > a ,
-  .div3info3 > a ,
-  .div4info3 > a ,
-  .div5info3 > a {
-    display: flex;
+}
+.infoother > a  {
+  display: flex;
     align-items: center;
     text-decoration: none; /* Remove underline from links */
     color: inherit; /* Inherit text color from parent */
-  }
-  .anh1info3,
-  .anh2info3,
-  .anh3info3,
-  .anh4info3,
-  .anh5info3 {
-    max-width: 170px; /* Adjust the max-width of the image as needed */
-    height: auto;
-    margin-right: 10px; /* Add margin between image and text */
-    margin-bottom: 10px; 
+}
+.anh1info3 {
+  max-width: 170px; /* Adjust the max-width of the image as needed */
+  height: auto;
+  margin-right: 10px; /* Add margin between image and text */
+  margin-bottom: 10px; 
+}
+ h4,
+ h6 {
+  margin: 0; /* Remove default margins */
+}
 
-  }
-  /* Add more styles as needed */
-  
+/* Style for buttons */
+/* Style for buttons */
+.button-container {
+  display: flex;
+  justify-content: space-around; /* Distribute buttons evenly */
+}
+
+.button-container button {
+  flex: 1; /* Distribute available space equally */
+  padding: 10px 15px; /* Adjust padding as needed */
+  background-color: #007bff; /* Change the background color */
+  color: #ffffff; /* Set text color */
+  border: none;
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer;
+  font-size: 14px; /* Set font size */
+}
+
+.button-container button:hover {
+  background-color: #0056b3; /* Change color on hover */
+}
+
+.button-container button + button {
+  margin-left: 10px; /* Add space between buttons */
+}
