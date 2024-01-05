@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border: 1px solid #ddd;
   }
   
   .video-wrapper {
@@ -43,8 +44,9 @@
     padding: 10px;
   }
   
-  .solieuthongke {
+  /* .solieuthongke {
     margin-top: 30px;
+    border: 1px solid #ddd;
   }
   
   .solieuthongke div {
@@ -55,6 +57,69 @@
   .solieuthongke img {
     max-width: 100%;
     height: auto;
+  } */
+  .solieuthongke {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center; /* Căn giữa chữ trong phần tử */
   }
   
+  .anh1thongke1 {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* Thêm khoảng cách giữa ảnh và chữ */
+  }
+  
+  h4 {
+    color: #555;
+    margin-bottom: 5px; /* Thêm khoảng cách giữa tiêu đề và mô tả */
+  }
+  
+  h6 {
+    color: #777;
+    margin-bottom: 15px; /* Thêm khoảng cách giữa mô tả và nút */
+  }
+  
+  /* h2 {
+    color: #333;
+  }
+  
+  h4 {
+    color: #555;
+  }
+  
+  h6 {
+    color: #777;
+  } */
+  
+  .button-container {
+    display: flex;
+    justify-content: space-around; /* Distribute buttons evenly */
+  }
+  
+  .button-container button {
+    flex: 1; /* Distribute available space equally */
+    padding: 10px 15px; /* Adjust padding as needed */
+    background-color: #007bff; /* Change the background color */
+    color: #ffffff; /* Set text color */
+    border: none;
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer;
+    font-size: 14px; /* Set font size */
+  }
+  
+  .button-container button:hover {
+    background-color: #0056b3; /* Change color on hover */
+  }
+  
+  .button-container button + button {
+    margin-left: 10px; /* Add space between buttons */
+  }
+
+
+
+
+  /* ------s */
   
