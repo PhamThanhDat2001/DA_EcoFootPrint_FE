@@ -74,8 +74,9 @@ const VideoEducation = (props) => {
   return (
     <>
     <button onClick={() => showAddForm()}>Thêm video</button>
-      <div >
-       
+    <h2>Video giáo dục</h2>
+
+      <div className='videoall'>
         {isModalOpenAdd && (
           <FormPostVideo
             isModalOpenAdd={isModalOpenAdd}

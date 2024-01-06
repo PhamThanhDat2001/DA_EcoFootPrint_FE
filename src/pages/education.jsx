@@ -10,8 +10,8 @@ const Dashboard = (props) => {
     <>
       <div>
         <div className="environment-info">
-          <h1>Video giáo dục</h1>
-        </div>
+        <h1>Nội dung giáo dục</h1>
+        </div>    
         <VideoEducation />
         <NewSpaper/>
         <Statistics/>

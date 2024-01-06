@@ -42,3 +42,10 @@ const selectRoleSelector = createSelector(
 export const selectRole = (state) => {
     return selectRoleSelector(state);
 }
+const selectIdSelector = createSelector(
+    userLoginInfoSelector,
+    state => state.userInfo.id); 
+
+export const selectId = (state) => {
+    return selectIdSelector(state);
+}

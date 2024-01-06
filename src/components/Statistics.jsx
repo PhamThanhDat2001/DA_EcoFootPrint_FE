@@ -75,8 +75,9 @@ const Statistics = (props) => {
   return (
     <>
     <button onClick={() => showAddForm()}>Thêm thông kế</button>
+    <h2>Số liệu thống kê & kết quả nghiên cứu</h2>
+
       <div className='solieuthongkeall'>
-        <h2>Số liệu thống kê & kết quả nghiên cứu</h2>
         {isModalOpenAdd && (
           <FormPostStatistics
             isModalOpenAdd={isModalOpenAdd}

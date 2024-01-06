@@ -15,8 +15,8 @@ export const Res = () => {
   const { state } = location;
 
   // Check if state is defined before accessing its properties
-  const ketquabieudo = state?.ketquabieudo || {};
-  const resulttong= state?.resulttong || {};
+  const ketquabieudo = state?.ketquabieudo || [];
+  const resulttong= state?.resulttong || [];
   console.log("tongkq",ketquabieudo)
   console.log("tong2",resulttong)
   // Access the properties from ketquabieudo
@@ -96,6 +96,7 @@ export const Res = () => {
   const nvgt = () => {
     navigate('/tinhtoan');
   }
+  
   return (
     <>
     <Button onClick={nvgt} className="chuyentrang">

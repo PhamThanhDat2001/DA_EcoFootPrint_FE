@@ -75,8 +75,8 @@ const InfoOther = (props) => {
   return (
     <>
     <button onClick={() => showAddForm()}>Thêm thông tin khác</button>
+    <h2>Thông tin khác</h2>
       <div className="info3">
-        <h2>Thông tin khác</h2>
         {isModalOpenAdd && (
           <FormPostInfoOther
             isModalOpenAdd={isModalOpenAdd}
