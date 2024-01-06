@@ -74,9 +74,10 @@ const InfoMain = (props) => {
 
   return (
     <>
-    <button onClick={() => showAddForm()}>Thêm</button>
+    <button onClick={() => showAddForm()}>Thêm bài báo</button>
+    <h2>Các bài báo, nghiên cứu về dấu chân sinh thái</h2>
+
       <div className='cacbaibao'>
-        <h2>Các bài báo, nghiên cứu về dấu chân sinh thái</h2>
         {isModalOpenAdd && (
           <FormPostNewSpaper
             isModalOpenAdd={isModalOpenAdd}

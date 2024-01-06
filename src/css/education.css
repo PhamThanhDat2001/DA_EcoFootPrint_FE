@@ -34,6 +34,7 @@
   
   .cacbaibao {
     margin-top: 30px;
+   
   }
   
   .baibao1,
@@ -64,6 +65,7 @@
     margin-bottom: 20px;
     position: relative;
     text-align: center; /* Căn giữa chữ trong phần tử */
+    
   }
   
   .anh1thongke1 {
@@ -93,7 +95,12 @@
   h6 {
     color: #777;
   } */
-  
+  .cacbaibao,
+  .solieuthongkeall,
+  .videoall{
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
   .button-container {
     display: flex;
     justify-content: space-around; /* Distribute buttons evenly */

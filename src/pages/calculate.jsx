@@ -8,9 +8,10 @@ import GreenEnergyUsage from '../components/GreenEnergyUsage';
 import Waste from '../components/Waste';
 import '../css/calculate.css'
 import { useNavigate } from 'react-router-dom';
-
-
-const Calculate = () => {
+import axios from 'axios';
+import { selectId } from '../redux/selectors/todoSelector';
+import { connect } from 'react-redux';
+const Calculate = (props) => {
   const [currentComponent, setCurrentComponent] = useState(null);
   const [waterConsumptionData, setWaterConsumptionData] = useState(null);
   const [transportationData, setTransportationData] = useState(null);
@@ -41,7 +42,7 @@ const Calculate = () => {
   };
   
 
-  const handleCalculate = () => {
+  const handleCalculate = async () => {
     // Check for null or undefined values and handle them
   
     // const ketquabieudo = {
@@ -54,11 +55,11 @@ const Calculate = () => {
     // };
     // console.log('bieudo:', ketquabieudo);
 
-    const waterConsumption= 0.3522 * (waterConsumptionData?.consumption ?? 0)
-    const transportation= 0.1159 * (transportationData?.distance ?? 0)
-    const greenEnergyUsage= 0.3382 * (greenEnergyUsageData?.usageAmount ?? 0)
+    const waterConsumption= 0.03522 * (waterConsumptionData?.consumption ?? 0)
+    const transportation= 0.01159 * (transportationData?.distance ?? 0)
+    const greenEnergyUsage= 0.03382 * (greenEnergyUsageData?.usageAmount ?? 0)
     const  foodConsumption= 0.1449 * (foodConsumptionData?.quantity ?? 0)
-    const energyConsumption= 0.3382 * (energyConsumptionData?.consumption ?? 0)
+    const energyConsumption= 0.03382 * (energyConsumptionData?.consumption ?? 0)
     const waste= 0.1932 * (wasteData?.amount ?? 0)
     // You can now use the 'result' object as needed
     const ketquabieudo = {
@@ -70,21 +71,50 @@ const Calculate = () => {
       waste,
     };
     const resulttong =
-        0.3522 * (waterConsumptionData?.consumption ?? 0) +
-        0.1159 * (transportationData?.distance ?? 0) +
-        0.3382 * (greenEnergyUsageData?.usageAmount ?? 0) +
+        0.03522 * (waterConsumptionData?.consumption ?? 0) +
+        0.01159 * (transportationData?.distance ?? 0) +
+        0.03382 * (greenEnergyUsageData?.usageAmount ?? 0) +
         0.1449 * (foodConsumptionData?.quantity ?? 0) +
-        0.3382 * (energyConsumptionData?.consumption ?? 0) +
+        0.03382 * (energyConsumptionData?.consumption ?? 0) +
         0.1932 * (wasteData?.amount ?? 0);
 
     console.log('tong1:', resulttong);
     setResulttong(resulttong);
     setKetquabieudo(ketquabieudo);
+    console.log('aidi:', props.Id);
+    console.log('dcm:', localStorage.getItem('id'));
+    // http://localhost:8080/api/v1/resultecofootprint
+    const dataToSave = {  
+      user_id: props.Id,
+      username: localStorage.getItem('username'),
+      result: resulttong,
+      total_results: resulttong,
+    };
 
+    try {
+      // Check if the username exists
+      const userExistsResponse = await axios.get(`http://localhost:8080/api/v1/resultecofootprint/username/${localStorage.getItem('username')}`);
+      if (userExistsResponse.data) {
+        // If the user exists, perform a PUT request
+        console.log('Data PUT');
+        await axios.put(`http://localhost:8080/api/v1/resultecofootprint/user/${props.Id}`, dataToSave);
+      } else {
+        // If the user does not exist, perform a POST request
+        console.log('Data POST');
+        await axios.post('http://localhost:8080/api/v1/resultecofootprint', dataToSave);
+      }
+
+      // Do something with the response if needed
+      console.log('Data saved successfully');
+    } catch (error) {
+      console.error('Error saving data to the server:', error);
+    }
+
+  
     // Pass the calculated results as part of the state object in navigate
     navigate('/charts', { state: { ketquabieudo, resulttong } });
   };
-
+  
 
   return (
     <>
@@ -113,5 +143,11 @@ const Calculate = () => {
     </>
   );
 };
+const mapGlobalStateToProps = (state) => {
+  return {
+    Id: selectId(state),
+  };
+};
 
-export default Calculate;
+export default connect(mapGlobalStateToProps)(Calculate);
+// export default Calculate;

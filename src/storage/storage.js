@@ -16,7 +16,8 @@ const getId = () => {
     return localStorage.getItem('id');
 };
 
-const setUserInfo = (username,email,fullname,gender,address,birthday,phone,status,role,avatarUrl) => {
+const setUserInfo = (id,username,email,fullname,gender,address,birthday,phone,status,role,avatarUrl) => {
+    localStorage.setItem('id', id);
     localStorage.setItem('username', username);
     localStorage.setItem('email', email);
     localStorage.setItem('fullname', fullname);
@@ -33,6 +34,7 @@ const setUserInfo = (username,email,fullname,gender,address,birthday,phone,statu
 
 const getUserInfo = () => {
     return {
+        "id" : localStorage.getItem("id"),
         "username" : localStorage.getItem("username"),
         "email" : localStorage.getItem("email"),
         "fullname" : localStorage.getItem("fullname"),

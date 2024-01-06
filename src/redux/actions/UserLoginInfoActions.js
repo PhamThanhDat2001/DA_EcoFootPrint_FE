@@ -15,10 +15,11 @@ import * as types from "../constants";
 //     }
 //   };
 // }
-export function setUserLoginInfo(username,email,fullname,gender,address,birthday,phone,status,role,avatarUrl) {
+export function setUserLoginInfo(id,username,email,fullname,gender,address,birthday,phone,status,role,avatarUrl) {
   return {
     type: types.USER_LOGIN_INFO,
     payload: { 
+      "id":id,
       "username":username,
       "email":email,
       "fullname":fullname,

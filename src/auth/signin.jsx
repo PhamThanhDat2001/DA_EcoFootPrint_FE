@@ -119,6 +119,7 @@ const Signin = (props) => {
 
               Storage.setToken(result.token)
               Storage.setUserInfo(
+                result.id,
                 result.username,
                 result.email,
                 result.fullname,
@@ -132,6 +133,7 @@ const Signin = (props) => {
 
                 props.setTokenInfo(result.token);
                 props.setUserLoginInfo(
+                  result.id,
                   result.username,
                   result.email,
                   result.fullname,
