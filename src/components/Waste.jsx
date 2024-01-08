@@ -26,44 +26,78 @@ const Waste = ({onWasteDataChange}) => {
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
-  useEffect(() => {
+  // useEffect(() => {
    
-    const fetchProfile = async (date) => {
-      try {
+  //   const fetchProfile = async (date) => {
+  //     try {
      
-        const result = await FootprintApi.getWasteByDate(date);
+  //       const result = await FootprintApi.getWasteByDate(date);
+  //       console.log('res==', result)
+  //       setConsumption(result);
+  //       onWasteDataChange(result);
+  //     } catch (error) {
+  //       console.error("Error in try block:", error);
+  //       // Handle the error as needed
+  //     }
+  //   };
+  //   fetchProfile(selectedDate);
+  // }, [selectedDate]);
+  useEffect(() => {
+    const fetchProfile = async (date, user_id) => {
+      try {
+        const result = await FootprintApi.getWasteByDateAndUserId(date, user_id);
         setConsumption(result);
+        // Send the fetched data to the parent component
         onWasteDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
       }
     };
-    fetchProfile(selectedDate);
+  
+    // Assuming user_id is available in your component, replace 'user_id_value' with the actual user_id.
+    const user_id = localStorage.getItem('id') || 'user_id_value';
+  
+    fetchProfile(selectedDate, user_id);
   }, [selectedDate]);
   
   const [updateInfo, setUpdateInfo] = useState();
   const [isOpenModalUpdate, setOpenModalUpdate] = useState(false);
   
  // update
- const update = async (date) => {
+ const update = async (date, user_id) => {
   setOpenModalUpdate(true);
 
-  const Info = await FootprintApi.getWasteByDate(date);
+  const Info = await FootprintApi.getWasteByDateAndUserId(date, user_id);
   setUpdateInfo(Info);
 
 }
+// const add = async (date,wasteType,amount,unit,description) => {
+//   const isDuplicate = await FootprintApi.existsBydateWaste(date);
+
+//   if (isDuplicate) {
+//     console.log("Duplicated date! Cannot add duplicate entry.");
+//     return;
+//   }
+//   const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description);
+//   setUpdateInfo(Info);
+
+// }
+
 const add = async (date,wasteType,amount,unit,description) => {
-  const isDuplicate = await FootprintApi.existsBydateWaste(date);
+  const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
+  console.log('res==',user_id)
+  const isDuplicate = await FootprintApi.existsBydateanduseridWaste(date);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
-  const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description);
-  setUpdateInfo(Info);
 
-}
+  const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description, user_id);
+  setUpdateInfo(Info);
+};
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -116,7 +150,7 @@ const add = async (date,wasteType,amount,unit,description) => {
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.wasteType,energyConsumptionAdd.amount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Thêm
 </Button>

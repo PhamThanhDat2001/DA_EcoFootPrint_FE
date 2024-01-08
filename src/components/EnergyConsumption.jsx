@@ -24,47 +24,76 @@ const EnergyConsumption = ({onEnergyConsumptionDataChange}) => {
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
-  useEffect(() => {
+  // useEffect(() => {
    
-    const fetchProfile = async (date) => {
-      try {
+  //   const fetchProfile = async (date) => {
+  //     try {
      
-        const result = await FootprintApi.getEnegyConsumptionByDate(date);
+  //       const result = await FootprintApi.getEnegyConsumptionByDate(date);
+  //       setConsumption(result);
+  //       onEnergyConsumptionDataChange(result);
+  //     } catch (error) {
+  //       console.error("Error in try block:", error);
+  //       // Handle the error as needed
+  //     }
+  //   };
+  //   fetchProfile(selectedDate);
+  // }, [selectedDate]);
+  useEffect(() => {
+    const fetchProfile = async (date, user_id) => {
+      try {
+        const result = await FootprintApi.getEnergyConsumptionByDateAndUserId(date, user_id);
         setConsumption(result);
+        // Send the fetched data to the parent component
         onEnergyConsumptionDataChange(result);
       } catch (error) {
         console.error("Error in try block:", error);
         // Handle the error as needed
       }
     };
-    fetchProfile(selectedDate);
-  }, [selectedDate]);
   
+    // Assuming user_id is available in your component, replace 'user_id_value' with the actual user_id.
+    const user_id = localStorage.getItem('id') || 'user_id_value';
+  
+    fetchProfile(selectedDate, user_id);
+  }, [selectedDate]);
   const [updateInfo, setUpdateInfo] = useState();
   const [isOpenModalUpdate, setOpenModalUpdate] = useState(false);
   
  // update
- const update = async (date) => {
+ const update = async (date, user_id) => {
   setOpenModalUpdate(true);
 
-  const Info = await FootprintApi.getEnegyConsumptionByDate(date);
+  const Info = await FootprintApi.getEnergyConsumptionByDateAndUserId(date, user_id);
   setUpdateInfo(Info);
 
 }
+// const add = async (date, energyType, consumption, unit, description) => {
+//   // Kiểm tra xem đã có thông tin với date đã cho chưa
+//   const isDuplicate = await FootprintApi.existsBydateEnegy(date);
+
+//   if (isDuplicate) {
+//     console.log("Duplicated date! Cannot add duplicate entry.");
+//     return;
+//   }
+
+//   // Nếu không có thông tin nào với date đã cho, thêm mới thông tin
+//   const newInfo = await FootprintApi.create(date, energyType, consumption, unit, description);
+//   setUpdateInfo(newInfo);
+// };
 const add = async (date, energyType, consumption, unit, description) => {
-  // Kiểm tra xem đã có thông tin với date đã cho chưa
-  const isDuplicate = await FootprintApi.existsBydateEnegy(date);
+  const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
+  console.log('res==',user_id)
+  const isDuplicate = await FootprintApi.existsBydateanduseridEnergyConsumption(date);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
 
-  // Nếu không có thông tin nào với date đã cho, thêm mới thông tin
-  const newInfo = await FootprintApi.create(date, energyType, consumption, unit, description);
-  setUpdateInfo(newInfo);
+  const Info = await FootprintApi.create(date, energyType, consumption, unit, description, user_id);
+  setUpdateInfo(Info);
 };
-
 // const add = async (date,energyType,consumption,unit,description) => {
 //   const Info = await FootprintApi.create(date,energyType,consumption,unit,description);
 //   setUpdateInfo(Info);
@@ -123,7 +152,7 @@ const add = async (date, energyType, consumption, unit, description) => {
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.energyType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Thêm
 </Button>
