@@ -21,50 +21,95 @@ const WaterConsumption = ({ onWaterConsumptionDataChange}) => {
       consumption: '',
       unit: '',
       description: '',
+      // user_id:'',
     });
     const navigate = useNavigate();
   
   const [selectedDate, setSelectedDate] = useState("");
-  useEffect(() => {
+  // useEffect(() => {
    
-    const fetchProfile = async (date) => {
-      try {
+  //   const fetchProfile = async (date) => {
+  //     try {
      
-        const result = await FootprintApi.getWaterConsumptionByDate(date);
-        setConsumption(result);
-        // Send the fetched data to the parent component
-        onWaterConsumptionDataChange(result);
-      } catch (error) {
-        console.error("Error in try block:", error);
-        // Handle the error as needed
-      }
-    };
-    fetchProfile(selectedDate);
-  }, [selectedDate]);
+  //       const result = await FootprintApi.getWaterConsumptionByDate(date);
+  //       setConsumption(result);
+  //       // Send the fetched data to the parent component
+  //       onWaterConsumptionDataChange(result);
+  //     } catch (error) {
+  //       console.error("Error in try block:", error);
+  //       // Handle the error as needed
+  //     }
+  //   };
+  //   fetchProfile(selectedDate);
+  // }, [selectedDate]);
   
+
+useEffect(() => {
+  const fetchProfile = async (date, user_id) => {
+    try {
+      const result = await FootprintApi.getWaterConsumptionByDateAndUserId(date, user_id);
+      setConsumption(result);
+      // Send the fetched data to the parent component
+      onWaterConsumptionDataChange(result);
+    } catch (error) {
+      console.error("Error in try block:", error);
+      // Handle the error as needed
+    }
+  };
+
+  // Assuming user_id is available in your component, replace 'user_id_value' with the actual user_id.
+  const user_id = localStorage.getItem('id') || 'user_id_value';
+
+  fetchProfile(selectedDate, user_id);
+}, [selectedDate]);
+
+
+
+
+
   const [updateInfo, setUpdateInfo] = useState();
   const [isOpenModalUpdate, setOpenModalUpdate] = useState(false);
   
  // update
- const update = async (date) => {
+ const update = async (date, user_id) => {
   setOpenModalUpdate(true);
 
-  const Info = await FootprintApi.getWaterConsumptionByDate(date);
+  const Info = await FootprintApi.getWaterConsumptionByDateAndUserId(date, user_id);
   setUpdateInfo(Info);
 
 }
-const add = async (date,usageType,consumption,unit,description) => {
-  const isDuplicate = await FootprintApi.existsBydateWater(date);
+// const add = async (date,usageType,consumption,unit,description) => {
+//   const isDuplicate = await FootprintApi.existsBydateWater(date);
+
+//   if (isDuplicate) {
+//     console.log("Duplicated date! Cannot add duplicate entry.");
+//     return;
+//   }
+
+//   const Info = await FootprintApi.createWaterConsumption(date,usageType,consumption,unit,description);
+//   setUpdateInfo(Info);
+  
+// }
+
+const add = async (date, usageType, consumption, unit, description) => {
+  const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
+  console.log('res==',user_id)
+  const isDuplicate = await FootprintApi.existsBydateanduseridWater(date);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
 
-  const Info = await FootprintApi.createWaterConsumption(date,usageType,consumption,unit,description);
+  const Info = await FootprintApi.createWaterConsumption(date, usageType, consumption, unit, description, user_id);
   setUpdateInfo(Info);
-  
-}
+};
+
+
+
+
+
+
 // const handleInput = (e) => {
 //   const { name, value } = e.target;
 //   setEnergyConsumption((prevValues) => ({
@@ -136,7 +181,7 @@ const add = async (date,usageType,consumption,unit,description) => {
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date)}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
     <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.usageType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
   Thêm
 </Button>
