@@ -13,10 +13,14 @@ const Diary = () => {
   const { confirm } = Modal;
 
   const api = 'http://localhost:8080/api/v1';
+  const apieco = 'http://localhost:8080/api/v1/resultecofootprint';
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemDetail, setItemDetail] = useState('');
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
 
+
+  // const [datatb, setDatatb] = useState([]);
+  const [datatbEco, setDatatbEco] = useState([]);
   const openmodaldilit = (echxep) => {
     confirm({
       title: 'XÓA HOẠT ĐỘNG CỦA BẠN?',
@@ -128,7 +132,30 @@ const Diary = () => {
       ),
     },
   ];
-
+  const columnseco = [
+    {
+      title: 'STT',
+      dataIndex: 'id',
+      key: 'id',
+      width: 300,
+      render: (text) => <a>{text}</a>,
+    
+    },
+    {
+      title: 'Thời gian',
+      dataIndex: 'date',
+      key: 'date',
+      width: 200,
+      sorter: (a, b) => new Date(a.logTime) - new Date(b.logTime),
+    },
+    {
+      title: 'Kết quả dấu chân sinh thái',
+      dataIndex: 'result',
+      key: 'result',
+      width: 800,
+    },
+    
+  ];
   const data = [
     {
       key: '1',
@@ -150,10 +177,22 @@ const Diary = () => {
       })
       .catch((err) => 'da co loi: ' + err);
   };
-
+  const apiCallEco = () => {
+    axios
+      .get(apieco)
+      .then((response) => {
+        console.log(response, 'res =====');
+        setDatatbEco(response?.data);
+      })
+      .catch((err) => 'da co loi: ' + err);
+  };
   useEffect(() => {
     apiCall();
+   
   }, []);
+  useEffect(() => {
+    apiCallEco();
+  }, []); 
 
   return (
     <>
@@ -169,6 +208,12 @@ const Diary = () => {
           dataSource={datatb.map((record, index) => ({ ...record, key: index }))}
           // scroll={{ y: 240 }}
         />
+        <h2>Kết quả dấu chân sinh thái</h2>
+       <Table
+  columns={columnseco}
+  dataSource={datatbEco.map((record, index) => ({ ...record, key: index }))}
+  // scroll={{ y: 240 }}
+/>
         <EditTable
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
