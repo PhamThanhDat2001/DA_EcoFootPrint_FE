@@ -22,6 +22,7 @@ const Calculate = (props) => {
   const navigate = useNavigate();
   const [resulttong, setResulttong] = useState(null);
   const [ketquabieudo, setKetquabieudo] = useState(null);
+  
   const renderComponent = (componentNumber) => {
     switch (componentNumber) {
       case 1:
@@ -82,37 +83,48 @@ const Calculate = (props) => {
     setResulttong(resulttong);
     setKetquabieudo(ketquabieudo);
     console.log('aidi:', props.Id);
-    console.log('dcm:', localStorage.getItem('id'));
+
     // http://localhost:8080/api/v1/resultecofootprint
+
     const dataToSave = {  
       user_id: props.Id,
       username: localStorage.getItem('username'),
       result: resulttong,
-      total_results: resulttong,
+      // total_results: total_results,
     };
 
-    try {
-      // Check if the username exists
-      const userExistsResponse = await axios.get(`http://localhost:8080/api/v1/resultecofootprint/username/${localStorage.getItem('username')}`);
-      if (userExistsResponse.data) {
-        // If the user exists, perform a PUT request
-        console.log('Data PUT');
-        await axios.put(`http://localhost:8080/api/v1/resultecofootprint/user/${props.Id}`, dataToSave);
-      } else {
-        // If the user does not exist, perform a POST request
-        console.log('Data POST');
-        await axios.post('http://localhost:8080/api/v1/resultecofootprint', dataToSave);
-      }
+    // try {
+    //   // Check if the username exists
+    //   const userExistsResponse = await axios.get(`http://localhost:8080/api/v1/resultecofootprint/username/${localStorage.getItem('username')}`);
+    //   if (userExistsResponse.data) {
+    //     // If the user exists, perform a PUT request
+    //     console.log('Data PUT');
+    //     await axios.put(`http://localhost:8080/api/v1/resultecofootprint/user/${props.Id}`, dataToSave);
+    //   } 
+    //   else {
+    //     // If the user does not exist, perform a POST request
+    //     console.log('Data POST');
+    //     await axios.post('http://localhost:8080/api/v1/resultecofootprint', dataToSave);
+    //   }
 
+    //   // Do something with the response if needed
+    //   console.log('Data saved successfully');
+    // } catch (error) {
+    //   console.error('Error saving data to the server:', error);
+    // }
+    try {
+      console.log('Data POST');
+      // Always perform a POST request
+      await axios.post('http://localhost:8080/api/v1/resultecofootprint', dataToSave);
+    
       // Do something with the response if needed
       console.log('Data saved successfully');
     } catch (error) {
       console.error('Error saving data to the server:', error);
     }
-
+    navigate('/charts', { state: { ketquabieudo, resulttong } });
   
     // Pass the calculated results as part of the state object in navigate
-    navigate('/charts', { state: { ketquabieudo, resulttong } });
   };
   
 

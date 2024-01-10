@@ -25,6 +25,9 @@ function MainContent() {
             <li>
               <Link to={`/congdong`}>Cộng đồng</Link>
             </li>
+            <li>
+              <Link to={`/ranking`}>Bảng xếp hạng</Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -26,6 +26,7 @@ import Diary from './pages/diary.jsx'
 import Calculate from './pages/calculate.jsx'
 
 import {Res} from './pages/charts.jsx'
+import Ranking from './pages/ranking.jsx'
 
 // const AuthenticatedRoot = withAuth(class Root extends React.Component {
 //   render() {
@@ -64,7 +65,11 @@ const router = createBrowserRouter([
         path: "congdong",
         element:<Question/>,
       },
-    
+      
+      {
+        path: '/ranking',
+        element: <Ranking/>
+      }
     ],
   },
   // {
