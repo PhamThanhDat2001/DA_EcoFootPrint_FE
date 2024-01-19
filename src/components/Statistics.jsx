@@ -12,7 +12,7 @@ import FormUpdateStatistics from './formUpdateStatistics';
 const Statistics = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
@@ -74,7 +74,12 @@ const Statistics = (props) => {
 
   return (
     <>
+    {isAdmin() && showAddButton && (
+              <div>
     <button onClick={() => showAddForm()}>Thêm thông kế</button>
+
+              </div>
+            )}
     <h2>Số liệu thống kê & kết quả nghiên cứu</h2>
 
       <div className='solieuthongkeall'>

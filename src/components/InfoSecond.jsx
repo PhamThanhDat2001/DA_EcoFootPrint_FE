@@ -11,7 +11,7 @@ import FormUpdateInfoSecond from './formUpdateInfoSecond';
 const InfoSecond = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAddSecond, setIsModalOpenAddSecond] = useState(false);
@@ -73,7 +73,12 @@ const InfoSecond = (props) => {
 
   return (
     <>
-      <button style={{marginTop:'40px'}} onClick={() => showAddSecondForm()}>Thêm thông tin phụ</button>
+     {isAdmin() && showAddButton && (
+              <div>
+             <button style={{marginTop:'40px'}} onClick={() => showAddSecondForm()}>Thêm thông tin phụ</button>
+ 
+              </div>
+            )}
       <h2>Thông tin phụ</h2>
       {isModalOpenAddSecond && (
           <FormPostInfoSecond

@@ -12,7 +12,7 @@ import FormUpdateNewSpaper from './formUpdateNewSpaper';
 const InfoMain = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
@@ -74,7 +74,11 @@ const InfoMain = (props) => {
 
   return (
     <>
-    <button onClick={() => showAddForm()}>Thêm bài báo</button>
+      {isAdmin() && showAddButton && (
+              <div>
+             <button onClick={() => showAddForm()}>Thêm bài báo</button>
+              </div>
+            )}
     <h2>Các bài báo, nghiên cứu về dấu chân sinh thái</h2>
 
       <div className='cacbaibao'>

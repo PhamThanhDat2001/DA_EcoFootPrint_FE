@@ -134,7 +134,7 @@ const Calculate = (props) => {
       <div className='divbutton1'>
         <button className='buttonn' onClick={() => setCurrentComponent(1)}>Tiêu thụ nước</button>
         <button className='buttonn' onClick={() => setCurrentComponent(2)}>Phương tiện di chuyển</button>
-        <button className='buttonn' onClick={() => setCurrentComponent(3)}>Năng lượng xanh</button>
+        <button className='buttonn' onClick={() => setCurrentComponent(3)}>Nhà ở</button>
       </div>
       <div className='divbutton2'>
       <button className='buttonn' onClick={() => setCurrentComponent(4)}>Tiêu thụ thực phẩm</button>

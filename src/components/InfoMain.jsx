@@ -10,7 +10,7 @@ import FormUpdateInfoMain from '../components/formUpdateInfoMain';
 const InfoMain = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
@@ -72,7 +72,12 @@ const InfoMain = (props) => {
 
   return (
     <>
+    {isAdmin() && showAddButton && (
+              <div>
     <button onClick={() => showAddForm()}>Thêm thông tin chính</button>
+               
+              </div>
+            )}
     <h2>Thông tin chính</h2>
 
       <div className="info1">
