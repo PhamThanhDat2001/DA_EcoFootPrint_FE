@@ -27,6 +27,7 @@ import Calculate from './pages/calculate.jsx'
 
 import {Res} from './pages/charts.jsx'
 import Ranking from './pages/ranking.jsx'
+import Community from './pages/question.jsx'
 
 // const AuthenticatedRoot = withAuth(class Root extends React.Component {
 //   render() {
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: "congdong",
-        element:<Question/>,
+        element:<Community/>,
       },
       
       {

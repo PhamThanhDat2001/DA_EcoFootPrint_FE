@@ -12,7 +12,7 @@ import FormUpdateInfoOther from './formUpdateInfoOther';
 const InfoOther = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
@@ -74,7 +74,13 @@ const InfoOther = (props) => {
 
   return (
     <>
-    <button onClick={() => showAddForm()}>Thêm thông tin khác</button>
+     {isAdmin() && showAddButton && (
+              <div>
+        <button onClick={() => showAddForm()}>Thêm thông tin khác</button>
+
+               
+              </div>
+            )}
     <h2>Thông tin khác</h2>
       <div className="info3">
         {isModalOpenAdd && (

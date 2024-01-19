@@ -11,7 +11,7 @@ import FormUpdateVideo from './formUpdateVideo';
 const VideoEducation = (props) => {
   const { confirm } = Modal;
   const { role } = props;
-  const isAdmin = () => role === 'USER';
+  const isAdmin = () => role === 'ADMIN';
 
   const [dynamicContent, setDynamicContent] = useState([]);
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
@@ -73,7 +73,11 @@ const VideoEducation = (props) => {
 
   return (
     <>
-    <button onClick={() => showAddForm()}>Thêm video</button>
+    {isAdmin() && showAddButton && (
+              <div>
+               <button onClick={() => showAddForm()}>Thêm video</button>
+              </div>
+            )}
     <h2>Video giáo dục</h2>
 
       <div className='videoall'>
