@@ -14,8 +14,8 @@ import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
 const WaterConsumption = ({ onWaterConsumptionDataChange}) => {
-    const [energyConsumption, setConsumption] = useState("");
-    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+    const [WaterConsumption, setWaterConsumption] = useState("");
+    const [WaterConsumptionAdd, setWaterConsumptionAdd] = useState({
       date: null,
       usageType: '',
       consumption: '',
@@ -32,7 +32,7 @@ const WaterConsumption = ({ onWaterConsumptionDataChange}) => {
   //     try {
      
   //       const result = await FootprintApi.getWaterConsumptionByDate(date);
-  //       setConsumption(result);
+  //       setWaterConsumption(result);
   //       // Send the fetched data to the parent component
   //       onWaterConsumptionDataChange(result);
   //     } catch (error) {
@@ -48,7 +48,7 @@ useEffect(() => {
   const fetchProfile = async (date, user_id) => {
     try {
       const result = await FootprintApi.getWaterConsumptionByDateAndUserId(date, user_id);
-      setConsumption(result);
+      setWaterConsumption(result);
       // Send the fetched data to the parent component
       onWaterConsumptionDataChange(result);
     } catch (error) {
@@ -112,7 +112,7 @@ const add = async (date, usageType, consumption, unit, description) => {
 
 // const handleInput = (e) => {
 //   const { name, value } = e.target;
-//   setEnergyConsumption((prevValues) => ({
+//   setWaterConsumptionAdd((prevValues) => ({
 //     ...prevValues,
 //     [name]: value,
 //   }));
@@ -120,8 +120,20 @@ const add = async (date, usageType, consumption, unit, description) => {
 // };
 
 
-  
-
+const validUsageTypes = ['nước sinh hoạt', 'nước sản xuất'];
+const validUnits = ['Lít (l)', 'Mét khối (m3)'];
+const handleSelectChange = (e) => {
+  setWaterConsumptionAdd({
+    ...WaterConsumptionAdd,
+    usageType: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setWaterConsumptionAdd({
+    ...WaterConsumptionAdd,
+    unit: e.target.value,
+  });
+};
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -138,8 +150,8 @@ const add = async (date, usageType, consumption, unit, description) => {
   onChange={(date, dateString) => {
     console.log('Selected Date:', dateString);
     setSelectedDate(dateString);
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    setWaterConsumptionAdd({
+      ...WaterConsumptionAdd,
       date: dateString,
     });
     
@@ -147,19 +159,36 @@ const add = async (date, usageType, consumption, unit, description) => {
   format="YYYY-MM-DD"
 />
 
-    <Label>Loại tiêu thụ nước</Label>
-    <Input value={energyConsumption.usageType}   onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
-      usageType: e.target.value,
-    })
-  } />
+    <Label>Loại nước thụ tiêu thụ</Label>
+    <select
+  value={WaterConsumption.usageType}
+  onChange={handleSelectChange}
+>
+  <option value="">Chọn loại sử dụng</option>
+  {validUsageTypes.map((usageType, index) => (
+    <option key={index} value={usageType}>
+      {usageType}
+    </option>
+  ))}
+</select>
+{/* <select
+        value={WaterConsumptionAdd.usageType}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn loại sử dụng</option>
+        {validUsageTypes.map((usageType, index) => (
+          <option key={index} value={usageType}>
+            {usageType}
+          </option>
+        ))}
+      </select> */}
+
     <Label>Số lượng nước tiêu thụ</Label>
     <Input
-        value={energyConsumption.consumption}
+        value={WaterConsumption.consumption}
         onChange={(e) => {
-          setEnergyConsumption({
-            ...energyConsumptionAdd,
+          setWaterConsumptionAdd({
+            ...WaterConsumptionAdd,
             consumption: e.target.value,
           });
 
@@ -168,21 +197,32 @@ const add = async (date, usageType, consumption, unit, description) => {
         }}
       />
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={WaterConsumption.unit}  onChange={(e) =>
+    setWaterConsumptionAdd({
+      ...WaterConsumptionAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+  <select
+        value={WaterConsumption.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {validUnits.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+<    Input value={WaterConsumption.description}  onChange={(e) =>
+    setWaterConsumptionAdd({
+      ...WaterConsumptionAdd,
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.usageType,energyConsumptionAdd.consumption,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', WaterConsumption) || update(WaterConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', WaterConsumptionAdd) || add(WaterConsumptionAdd.date,WaterConsumptionAdd.usageType,WaterConsumptionAdd.consumption,WaterConsumptionAdd.unit,WaterConsumptionAdd.description) } > 
   Thêm
 </Button>
   {/* </div> */}

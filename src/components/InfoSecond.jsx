@@ -79,7 +79,7 @@ const InfoSecond = (props) => {
  
               </div>
             )}
-      <h2>Thông tin phụ</h2>
+      {/* <h2>Thông tin phụ</h2> */}
       {isModalOpenAddSecond && (
           <FormPostInfoSecond
             isModalOpenAddSecond={isModalOpenAddSecond}

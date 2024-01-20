@@ -14,8 +14,8 @@ import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
 const GreenEnergyUsage = ({onGreenEnergyUsageDataChange}) => {
-    const [energyConsumption, setConsumption] = useState("");
-    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+    const [House, setHouse] = useState("");
+    const [HouseAdd, setHouseAdd] = useState({
       date: null,
       energySource: '',
       usageAmount: '',
@@ -31,7 +31,7 @@ const GreenEnergyUsage = ({onGreenEnergyUsageDataChange}) => {
   //     try {
      
   //       const result = await FootprintApi.getGreenEnergyUsageByDate(date);
-  //       setConsumption(result);
+  //       setHouse(result);
   //       onGreenEnergyUsageDataChange(result);
   //     } catch (error) {
   //       console.error("Error in try block:", error);
@@ -44,7 +44,7 @@ const GreenEnergyUsage = ({onGreenEnergyUsageDataChange}) => {
     const fetchProfile = async (date, user_id) => {
       try {
         const result = await FootprintApi.getGreenEnergyUsageByDateAndUserId(date, user_id);
-        setConsumption(result);
+        setHouse(result);
         // Send the fetched data to the parent component
         onGreenEnergyUsageDataChange(result);
       } catch (error) {
@@ -93,6 +93,21 @@ const add = async (date,energySource,usageAmount,unit,description) => {
   const Info = await FootprintApi.createGreenEnergyUsage(date,energySource,usageAmount,unit,description, user_id);
   setUpdateInfo(Info);
 };
+
+const validEnergySources = ['Nhà cấp 4', 'Nhà biệt thự', 'Nhà ống'];
+const validUnits = ['m2', 'ha', 'km2'];
+const handleSelectChange = (e) => {
+  setHouseAdd({
+    ...HouseAdd,
+    energySource: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setHouseAdd({
+    ...HouseAdd,
+    unit: e.target.value,
+  });
+};
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -109,44 +124,66 @@ const add = async (date,energySource,usageAmount,unit,description) => {
   onChange={(date, dateString) => {
     console.log('Selected Date:', dateString);
     setSelectedDate(dateString);
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    setHouseAdd({
+      ...HouseAdd,
       date: dateString,
     });
   }}
   format="YYYY-MM-DD"
 />
 
-    <Label>Loại nguồn năng lượng xanh</Label>
-    <Input value={energyConsumption.energySource}   onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    <Label>Loại nhà ở</Label>
+    {/* <Input value={House.energySource}   onChange={(e) =>
+    setHouseAdd({
+      ...HouseAdd,
       energySource: e.target.value,
     })
-  } />
-    <Label>Số lượng năng lượng sử dụng</Label>
-    <Input value={energyConsumption.usageAmount}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+  } /> */}
+  <select
+        value={House.energySource}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn loại nhà ở</option>
+        {validEnergySources.map((source, index) => (
+          <option key={index} value={source}>
+            {source}
+          </option>
+        ))}
+      </select>
+    <Label>Diện tích</Label>
+    <Input value={House.usageAmount}  onChange={(e) =>
+    setHouseAdd({
+      ...HouseAdd,
       usageAmount: e.target.value,
     })
   }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={House.unit}  onChange={(e) =>
+    setHouseAdd({
+      ...HouseAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+   <select
+        value={House.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {validUnits.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+<    Input value={House.description}  onChange={(e) =>
+    setHouseAdd({
+      ...HouseAdd,
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.energySource,energyConsumptionAdd.usageAmount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', House) || update(House.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', HouseAdd) || add(HouseAdd.date,HouseAdd.energySource,HouseAdd.usageAmount,HouseAdd.unit,HouseAdd.description) } > 
   Thêm
 </Button>
   {/* </div> */}

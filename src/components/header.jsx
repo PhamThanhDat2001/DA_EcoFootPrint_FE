@@ -173,7 +173,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: '#4caf50' }}>
         <Toolbar>
         <img style={{ marginLeft: '15px' }} src="https://ecofootprint.vn/images/config/logo-01_1473319995.png" alt="Description of the imassge" className="anh1" />
           {/* <IconButton

@@ -1,11 +1,12 @@
 /* question.css */
 
 .community-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-h2 {
+.community-container h2 {
+  font-size: 1.5em;
   color: #333;
 }
 
@@ -15,49 +16,95 @@ form {
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 input {
   width: 100%;
   padding: 8px;
-  box-sizing: border-box;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  padding: 10px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 li {
-  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  padding: 16px;
+  border-radius: 4px;
 }
 
-/* Style for the "View Answers" button */
-button.view-answers {
-  background-color: #008CBA;
-  color: white;
-  padding: 8px 12px;
+li button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 4px 8px;
+  margin-top: 8px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button.view-answers:hover {
-  background-color: #006687;
+li button:hover {
+  background-color: #218838;
 }
+
+li > div {
+  margin-top: 16px;
+}
+
+/* Answer Form */
+li form {
+  margin-top: 16px;
+}
+
+/* Answers List */
+ul ul {
+  margin-top: 8px;
+}
+
+ul ul li {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+/* Close Button */
+li > div > button {
+  margin-top: 16px;
+  background-color: #dc3545;
+}
+
+li > div > button:hover {
+  background-color: #c82333;
+}
+
+
+
+
+
+
+
+
+
+
+

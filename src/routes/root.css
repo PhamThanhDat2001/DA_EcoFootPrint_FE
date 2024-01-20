@@ -1,8 +1,15 @@
-/* #header {
+#header {
     background-color: #80f880;
     color: #fff;
-   
-  } */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* background-color: #007bff; */
+    color: #fff;
+    /* padding: 5px; */
+    z-index: 1000; 
+  }
 
   .navleft {
     display: flex;
@@ -11,10 +18,10 @@
     margin: 0;
     flex: 1;
   }
-  #detail {
+  /* #detail {
     display: flex;
   flex: 1; 
-  }
+  } */
  
 html {
     box-sizing: border-box;
@@ -45,9 +52,10 @@ html {
     line-height: 1.5;
     color: #121212;
   }
-  /* .navleft li {
+  .navleft li {
     display: flex;
-  } */
+      
+  }
   textarea,
   input,
   button {
@@ -122,13 +130,30 @@ html {
     height: 100%;
     width: 100%;
   }
-  
+  /* fixed */
+/*   
   #sidebar {
-    width: 22rem;
-    background-color: #f7f7f7;
+    width: 18rem;  
+    background-color: #F0F5F5;
     border-right: solid 1px #e3e3e3;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
+
+
+  } */
+  #sidebar {
+    width: 18rem;
+    background-color: #F0F5F5;
+    border-right: solid 1px #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: 100vh; /* Make the sidebar take the full height of the viewport */
+    overflow-y: auto; /* Add scrollbar if content overflows */
   }
   
   #sidebar > * {
@@ -206,10 +231,10 @@ html {
     overflow: auto;
     padding-top: 1rem;
   }
-  
+  /* mau icon */
   #sidebar nav a span {
     float: right;
-    color: #eeb004;
+    color: #2E8B57;
   }
   #sidebar nav a.active span {
     color: inherit;
@@ -231,7 +256,7 @@ html {
   #sidebar li {
     margin: 0.25rem 0;
   }
-  
+  /* chu */
   #sidebar nav a {
     display: flex;
     align-items: center;
@@ -241,30 +266,37 @@ html {
     white-space: pre;
     padding: 0.5rem;
     border-radius: 8px;
-    color: inherit;
+    color: #2E3A4B;
     text-decoration: none;
     gap: 1rem;
   }
   
   #sidebar nav a:hover {
-    background: #e3e3e3;
+   background: rgba(139, 195, 74, 1); /* Màu xanh lá cây đầy đủ khi hover */
+   font-weight: bold;
   }
   
   #sidebar nav a.active {
-    background: hsl(224, 98%, 58%);
-    color: white;
+    background: rgba(139, 195, 74, 1); /* Màu xanh lá cây đầy đủ khi hover */
+    font-weight: bold;
   }
   
   #sidebar nav a.pending {
     color: hsl(224, 98%, 58%);
   }
-  
-  #detail {
+  /* //day */
+  /* #detail {
     flex: 1;
     padding: 1rem 2rem;
     width: 100%;
+  } */
+  #detail {
+    margin-top: 80px;
+    flex: 1;
+    padding: 1rem 3rem;
+    width: 100%;
+    margin-left: 18rem; /* Adjust the margin to accommodate the fixed sidebar */
   }
-  
   #detail.loading {
     opacity: 0.25;
     transition: opacity 200ms;

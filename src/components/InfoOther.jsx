@@ -81,7 +81,7 @@ const InfoOther = (props) => {
                
               </div>
             )}
-    <h2>Thông tin khác</h2>
+    {/* <h2>Thông tin khác</h2> */}
       <div className="info3">
         {isModalOpenAdd && (
           <FormPostInfoOther

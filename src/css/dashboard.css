@@ -13,7 +13,7 @@
     margin: 0 auto; /* Center the image horizontally */
     max-width: 50%; /* Make sure the image doesn't overflow its container */
     height: auto; /* Maintain aspect ratio */
-    
+   
   }
   
   .anh1info1 + a {
@@ -33,7 +33,7 @@
 .info1 a,
 .info2 a{
   text-decoration: none;
-  color: #333;
+  color: #333;  
   font-weight: bold;
 }
 
@@ -125,13 +125,13 @@
 /* Style for buttons */
 .button-container {
   display: flex;
-  justify-content: space-around; /* Distribute buttons evenly */
+  justify-content: space-around; 
 }
 
 .button-container button {
   flex: 1; /* Distribute available space equally */
   padding: 10px 15px; /* Adjust padding as needed */
-  background-color: #007bff; /* Change the background color */
+  /* background-color: #007bff; */
   color: #ffffff; /* Set text color */
   border: none;
   border-radius: 5px; /* Add rounded corners */
@@ -140,7 +140,7 @@
 }
 
 .button-container button:hover {
-  background-color: #0056b3; /* Change color on hover */
+  background-color: #0056b3; 
 }
 
 .button-container button + button {

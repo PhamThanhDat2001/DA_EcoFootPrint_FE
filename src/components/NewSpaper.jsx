@@ -79,7 +79,7 @@ const InfoMain = (props) => {
              <button onClick={() => showAddForm()}>Thêm bài báo</button>
               </div>
             )}
-    <h2>Các bài báo, nghiên cứu về dấu chân sinh thái</h2>
+    {/* <h2>Các bài báo, nghiên cứu về dấu chân sinh thái</h2> */}
 
       <div className='cacbaibao'>
         {isModalOpenAdd && (

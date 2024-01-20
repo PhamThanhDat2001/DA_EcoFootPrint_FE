@@ -57,7 +57,7 @@ const Info = () => {
   const Info = await Api.getById(id);
   setUpdateInfo(Info);
   setOpenModalUpdate(true);
-
+  console.log('abc')
 }
 
 const showSuccessNotification = (title, message) => {

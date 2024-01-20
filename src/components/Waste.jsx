@@ -15,8 +15,8 @@ import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
 const Waste = ({onWasteDataChange}) => {
-    const [energyConsumption, setConsumption] = useState("");
-    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+    const [Waste, setWaste] = useState("");
+    const [WasteAdd, setWasteAdd] = useState({
       date: null,
       wasteType: '',
       amount: '',
@@ -33,7 +33,7 @@ const Waste = ({onWasteDataChange}) => {
      
   //       const result = await FootprintApi.getWasteByDate(date);
   //       console.log('res==', result)
-  //       setConsumption(result);
+  //       setWaste(result);
   //       onWasteDataChange(result);
   //     } catch (error) {
   //       console.error("Error in try block:", error);
@@ -46,7 +46,7 @@ const Waste = ({onWasteDataChange}) => {
     const fetchProfile = async (date, user_id) => {
       try {
         const result = await FootprintApi.getWasteByDateAndUserId(date, user_id);
-        setConsumption(result);
+        setWaste(result);
         // Send the fetched data to the parent component
         onWasteDataChange(result);
       } catch (error) {
@@ -97,7 +97,20 @@ const add = async (date,wasteType,amount,unit,description) => {
   const Info = await FootprintApi.createWaste(date,wasteType,amount,unit,description, user_id);
   setUpdateInfo(Info);
 };
-
+const validWasteTypes = ['Rác thải sinh hoạt', 'Rác thải công nghiệp', 'Rác thải xây dựng'];
+const validUnits = ['Kilogram (kg)', 'Gram (g)', 'Tấn'];
+const handleSelectChange = (e) => {
+  setWasteAdd({
+    ...WasteAdd,
+    wasteType: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setWasteAdd({
+    ...WasteAdd,
+    unit: e.target.value,
+  });
+};
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -114,8 +127,8 @@ const add = async (date,wasteType,amount,unit,description) => {
   onChange={(date, dateString) => {
     console.log('Selected Date:', dateString);
     setSelectedDate(dateString);
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    setWasteAdd({
+      ...WasteAdd,
       date: dateString,
     });
   }}
@@ -123,35 +136,57 @@ const add = async (date,wasteType,amount,unit,description) => {
 />
 
     <Label>Loại chất thải </Label>
-    <Input value={energyConsumption.wasteType}   onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={Waste.wasteType}   onChange={(e) =>
+    setWasteAdd({
+      ...WasteAdd,
       wasteType: e.target.value,
     })
-  } />
+  } /> */}
+  <select
+        value={Waste.wasteType}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn loại chất thải</option>
+        {validWasteTypes.map((type, index) => (
+          <option key={index} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
     <Label>Số lượng chất thải</Label>
-    <Input value={energyConsumption.amount}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    <Input value={Waste.amount}  onChange={(e) =>
+    setWasteAdd({
+      ...WasteAdd,
       amount: e.target.value,
     })
   }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={Waste.unit}  onChange={(e) =>
+    setWasteAdd({
+      ...WasteAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+    <select
+        value={Waste.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {validUnits.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+<    Input value={Waste.description}  onChange={(e) =>
+    setWasteAdd({
+      ...WasteAdd,
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.wasteType,energyConsumptionAdd.amount,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', Waste) || update(Waste.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', WasteAdd) || add(WasteAdd.date,WasteAdd.wasteType,WasteAdd.amount,WasteAdd.unit,WasteAdd.description) } > 
   Thêm
 </Button>
   {/* </div> */}

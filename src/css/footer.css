@@ -39,11 +39,13 @@
  .div3footer{
     display: flex;
     justify-content: center;
-    background-color: #1a1a1ae5; /* Dark background color */
-    color: #ffffffd3; /* White text color for better contrast */
+    background-color: #6dbe36e5; 
+    color: #ffffffd3; 
  }
 #footer{
    background-color: #f8f8f8;
+   margin-left: 270px;
+      
 }
 .veeco{
    margin-left: 65px;
