@@ -13,8 +13,8 @@ import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
 const FoodConsumption = ({onFoodConsumptionDataChange}) => {
-    const [energyConsumption, setConsumption] = useState("");
-    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+    const [FoodConsumption, setFoodConsumption] = useState("");
+    const [FoodConsumptionAdd, setFoodConsumptionAdd] = useState({
       date: null,
       foodItem: '',
       quantity: '',
@@ -30,7 +30,7 @@ const FoodConsumption = ({onFoodConsumptionDataChange}) => {
   //     try {
      
   //       const result = await FootprintApi.getFoodConsumptionByDate(date);
-  //       setConsumption(result);
+  //       setFoodConsumption(result);
   //       onFoodConsumptionDataChange(result);
   //     } catch (error) {
   //       console.error("Error in try block:", error);
@@ -43,7 +43,7 @@ const FoodConsumption = ({onFoodConsumptionDataChange}) => {
     const fetchProfile = async (date, user_id) => {
       try {
         const result = await FootprintApi.getFoodConsumptionByDateAndUserId(date, user_id);
-        setConsumption(result);
+        setFoodConsumption(result);
         // Send the fetched data to the parent component
         onFoodConsumptionDataChange(result);
       } catch (error) {
@@ -92,6 +92,22 @@ const add = async (date,foodItem,quantity,unit,description) => {
   const Info = await FootprintApi.createFoodConsumption(date,foodItem,quantity,unit,description, user_id);
   setUpdateInfo(Info);
 };
+const validFoodItems = ['Gia súc', 'Gia cầm', 'Cá nước mặn', 'Cá nước ngọt', 
+'Rau củ', 'Ngũ cốc', 'Sản phẩm từ sữa', 'Sản phẩm từ đậu nành', 'Thực phẩm chế biến', 'Thực phẩm tươi sống'];
+const validUnits = ['Kilogram (kg)', 'Gram (g)','mililít (ml)', 'Lít (l)'];
+const handleSelectChange = (e) => {
+  setFoodConsumptionAdd({
+    ...FoodConsumptionAdd,
+    foodItem: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setFoodConsumptionAdd({
+    ...FoodConsumptionAdd,
+    unit: e.target.value,
+  });
+};
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -108,8 +124,8 @@ const add = async (date,foodItem,quantity,unit,description) => {
   onChange={(date, dateString) => {
     console.log('Selected Date:', dateString);
     setSelectedDate(dateString);
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    setFoodConsumptionAdd({
+      ...FoodConsumptionAdd,
       date: dateString,
     });
   }}
@@ -117,35 +133,51 @@ const add = async (date,foodItem,quantity,unit,description) => {
 />
 
     <Label>Loại thực phẩm</Label>
-    <Input value={energyConsumption.foodItem}   onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
-      foodItem: e.target.value,
-    })
-  } />
+    <select
+        value={FoodConsumption.foodItem}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn mục thực phẩm</option>
+        {validFoodItems.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
     <Label>Số lượng tiêu thụ</Label>
-    <Input value={energyConsumption.quantity}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    <Input value={FoodConsumption.quantity}  onChange={(e) =>
+    setFoodConsumptionAdd({
+      ...FoodConsumptionAdd,
       quantity: e.target.value,
     })
   }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={FoodConsumption.unit}  onChange={(e) =>
+    setFoodConsumptionAdd({
+      ...FoodConsumptionAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+  <select
+        value={FoodConsumption.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {validUnits.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+<    Input value={FoodConsumption.description}  onChange={(e) =>
+    setFoodConsumptionAdd({
+      ...FoodConsumptionAdd,
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.foodItem,energyConsumptionAdd.quantity,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', FoodConsumption) || update(FoodConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', FoodConsumptionAdd) || add(FoodConsumptionAdd.date,FoodConsumptionAdd.foodItem,FoodConsumptionAdd.quantity,FoodConsumptionAdd.unit,FoodConsumptionAdd.description) } > 
   Thêm
 </Button>
   {/* </div> */}

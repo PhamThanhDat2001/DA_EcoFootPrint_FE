@@ -51,7 +51,8 @@ const Community = () => {
       // Send a POST request to create a new question
       await axios.post('http://localhost:8080/api/v1/questions', {
         content: newQuestionContent,
-        username: username, // Include the username in the request
+        username: localStorage.getItem('username'), // Include the username in the request
+        userid: localStorage.getItem('id')
       });
 
       // Fetch updated list of questions
@@ -77,12 +78,14 @@ const Community = () => {
       // Send a POST request to create a new answer
       await axios.post(`http://localhost:8080/api/v1/questions/${selectedQuestion}/answers`, {
         content: newAnswerContent,
-        username: username, // Include the username in the request
+        // username: username, // Include the username in the request
+        username:localStorage.getItem('username'),
+        userid: localStorage.getItem('id')
       });
 
       // Fetch updated answers for the selected question
       fetchAnswers(selectedQuestion);
-
+      // fetchAnswers();
       // Clear the input field
       setNewAnswerContent('');
     } catch (error) {
@@ -115,7 +118,7 @@ const Community = () => {
       <ul>
         {questions.map((question) => (
           <li key={question.id}>
-            {question.content} by {localStorage.getItem('username')}{' '}
+            {question.content} by {question.username}{' '}
             <button onClick={() => handleQuestionClick(question.id)}>Xem các câu trả lời</button>
             {selectedQuestion === question.id && showAnswers && (
               <div>
@@ -137,7 +140,7 @@ const Community = () => {
                 <ul>
                   {question.answers &&
                     question.answers.map((answer) => (
-                      <li key={answer.id}>{answer.content} by {localStorage.getItem('username')}</li>
+                      <li key={answer.id}>{answer.content} by {answer.username}</li>
                     ))}
                 </ul>
               </div>

@@ -100,6 +100,21 @@ const add = async (date, energyType, consumption, unit, description) => {
 
 // }
 
+const validEnergyTypes = ['Điện', 'Năng lượng gió', 'Năng lượng mặt trời'];
+const consumptionOptions = ['kWh'];
+const handleSelectChange = (e) => {
+  setEnergyConsumption({
+    ...energyConsumptionAdd,
+    energyType: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setEnergyConsumption({
+    ...energyConsumptionAdd,
+    unit: e.target.value,
+  });
+};
+
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -125,12 +140,23 @@ const add = async (date, energyType, consumption, unit, description) => {
 />
 
     <Label>Loại năng lượng</Label>
-    <Input value={energyConsumption.energyType}   onChange={(e) =>
+    {/* <Input value={energyConsumption.energyType}   onChange={(e) =>
     setEnergyConsumption({
       ...energyConsumptionAdd,
       energyType: e.target.value,
     })
-  } />
+  } /> */}
+  <select
+        value={energyConsumption.energyType}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn loại năng lượng</option>
+        {validEnergyTypes.map((type, index) => (
+          <option key={index} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
     <Label>Số liệu tiêu thụ</Label>
     <Input value={energyConsumption.consumption}  onChange={(e) =>
     setEnergyConsumption({
@@ -139,12 +165,23 @@ const add = async (date, energyType, consumption, unit, description) => {
     })
   }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
+    {/* <Input value={energyConsumption.unit}  onChange={(e) =>
     setEnergyConsumption({
       ...energyConsumptionAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+   <select
+        value={energyConsumption.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {consumptionOptions.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
 <    Input value={energyConsumption.description}  onChange={(e) =>
     setEnergyConsumption({

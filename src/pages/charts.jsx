@@ -29,7 +29,7 @@ export const Res = () => {
 
   // Update chartData based on the received results
   const chartData = {
-    labels: ['Tiêu thụ nước', 'Phương tiện di chuyển', 'Năng lượng xanh', 'Tiêu thụ thực phẩm', 'Tiêu thụ năng lượng', 'Chất thải'],
+    labels: ['Tiêu thụ nước', 'Phương tiện di chuyển', 'Nhà ở', 'Tiêu thụ thực phẩm', 'Tiêu thụ năng lượng', 'Chất thải'],
     datasets: [
       {
         label: 'Environmental Impact',

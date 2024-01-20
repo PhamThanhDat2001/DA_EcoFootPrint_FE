@@ -13,8 +13,8 @@ import FootprintApi from '../api/footprint.js';
 import moment from 'moment';
 
 const Transportation = ({onTransportationDataChange}) => {
-    const [energyConsumption, setConsumption] = useState("");
-    const [energyConsumptionAdd, setEnergyConsumption] = useState({
+    const [transportation, setConsumption] = useState("");
+    const [transportationAdd, setTransportation] = useState({
       date: null,
       transportMode: '',
       distance: '',
@@ -95,8 +95,20 @@ const add = async (date,transportMode,distance,unit,description) => {
   const Info = await FootprintApi.createTransportation(date,transportMode,distance,unit,description, user_id);
   setUpdateInfo(Info);
 };
-
-
+const validTransportModes = ['Xe máy', 'Ô tô'];
+const validUnits = ['Kilometre (km)', 'Metre (m)'];
+const handleSelectChange = (e) => {
+  setTransportation({
+    ...transportationAdd,
+    transportMode: e.target.value,
+  });
+};
+const handleSelectChange2 = (e) => {
+  setTransportation({
+    ...transportationAdd,
+    unit: e.target.value,
+  });
+};
   return(
     
   <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
@@ -113,8 +125,8 @@ const add = async (date,transportMode,distance,unit,description) => {
   onChange={(date, dateString) => {
     console.log('Selected Date:', dateString);
     setSelectedDate(dateString);
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    setTransportation({
+      ...transportationAdd,
       date: dateString,
     });
   }}
@@ -122,35 +134,57 @@ const add = async (date,transportMode,distance,unit,description) => {
 />
 
     <Label>Loại phương tiện </Label>
-    <Input value={energyConsumption.transportMode}   onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={transportation.transportMode}   onChange={(e) =>
+    setTransportation({
+      ...transportationAdd,
       transportMode: e.target.value,
     })
-  } />
+  } /> */}
+  <select
+        value={transportation.transportMode}
+        onChange={handleSelectChange}
+      >
+        <option value="">Chọn phương tiện vận chuyển</option>
+        {validTransportModes.map((mode, index) => (
+          <option key={index} value={mode}>
+            {mode}
+          </option>
+        ))}
+      </select>
     <Label>Khoảng cách đã đi</Label>
-    <Input value={energyConsumption.distance}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    <Input value={transportation.distance}  onChange={(e) =>
+    setTransportation({
+      ...transportationAdd,
       distance: e.target.value,
     })
   }/>
     <Label>Đơn vị đo lường</Label>
-    <Input value={energyConsumption.unit}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+    {/* <Input value={transportation.unit}  onChange={(e) =>
+    setTransportation({
+      ...transportationAdd,
       unit: e.target.value,
     })
-  }/>
+  }/> */}
+  <select
+        value={transportation.unit}
+        onChange={handleSelectChange2}
+      >
+        <option value="">Chọn đơn vị</option>
+        {validUnits.map((unit, index) => (
+          <option key={index} value={unit}>
+            {unit}
+          </option>
+        ))}
+      </select>
     <Label>Mô tả</Label>
-<    Input value={energyConsumption.description}  onChange={(e) =>
-    setEnergyConsumption({
-      ...energyConsumptionAdd,
+<    Input value={transportation.description}  onChange={(e) =>
+    setTransportation({
+      ...transportationAdd,
       description: e.target.value,
     })
   }/>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumption) || update(energyConsumption.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
-    <Button type="primary" onClick={() => console.log('userInfo:', energyConsumptionAdd) || add(energyConsumptionAdd.date,energyConsumptionAdd.transportMode,energyConsumptionAdd.distance,energyConsumptionAdd.unit,energyConsumptionAdd.description) } > 
+    <Button type="primary" onClick={() => console.log('userInfo:', transportation) || update(transportation.date,localStorage.getItem('id'))}>Chỉnh sửa</Button>
+    <Button type="primary" onClick={() => console.log('userInfo:', transportationAdd) || add(transportationAdd.date,transportationAdd.transportMode,transportationAdd.distance,transportationAdd.unit,transportationAdd.description) } > 
   Thêm
 </Button>
   {/* </div> */}

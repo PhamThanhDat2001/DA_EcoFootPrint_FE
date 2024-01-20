@@ -78,7 +78,7 @@ const InfoMain = (props) => {
                
               </div>
             )}
-    <h2>Thông tin chính</h2>
+    {/* <h2>Thông tin chính</h2> */}
 
       <div className="info1">
         {isModalOpenAdd && (
