@@ -35,43 +35,44 @@ export const Res = () => {
         label: 'Environmental Impact',
         data: [waterConsumption, transportation, greenEnergyUsage, foodConsumption, energyConsumption, waste],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40',
+          // Add more colors as needed
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40',
+          // Add more colors as needed
         ],
         borderWidth: 1,
       },
     ],
-
-    
   };
   const sosanh = (resulttong) => {
     if (resulttong > 0) {
       const difference = resulttong - 2.2;
+  
       return (
-        <div style={{ whiteSpace: 'pre-line' }}>
-          Dựa vào kết quả tính toán dấu chân sinh thái cho thấy thói quen sống là: {resulttong} , 
-          tuy nhiên dấu chân sinh thái của Trái đất là 2.2, so với dấu chân sinh thái Trái Đất thì 
-          lớn hơn {difference}. Thói quen sống của em chưa thực sự phù hợp.
-          {'\n'}
-          1. Về mặt ăn uống: chế độ ăn chưa hợp lí, hằng ngày mua quá nhiều thức ăn mà không tính toán dẫn đến việc thừa thức ăn gây lãng phí
-          {'\n'}
-          2. Về mặt phương tiện: đi lại khá nhiều bằng xe máy, thỉnh thoảng có chạy bộ, đi bộ để giảm bớt lượng khí thải ra môi trường
-          {'\n'}
-          3. Biết tiết kiệm nước, không xài nước lãng phí
-          {'\n'}
-          4. Thường xuyên tái chế những vật dụng không dùng đến nữa: chai nhựa, giấy báo.
+        <div className="advice-container">
+          <p>
+            Dựa vào kết quả tính toán dấu chân sinh thái cho thấy thói quen sống là: {resulttong},
+            tuy nhiên dấu chân sinh thái của Trái đất là 2.2, so với dấu chân sinh thái Trái Đất thì
+            lớn hơn {difference}. Thói quen sống của bạn chưa thực sự phù hợp.
+          </p>
+          <ul>
+            <li>Về mặt ăn uống: chế độ ăn chưa hợp lí, hằng ngày mua quá nhiều thức ăn mà không tính toán dẫn đến việc thừa thức ăn gây lãng phí.</li>
+            <li>Về mặt phương tiện: đi lại khá nhiều bằng xe máy, thỉnh thoảng có chạy bộ, đi bộ để giảm bớt lượng khí thải ra môi trường.</li>
+            <li>Biết tiết kiệm nước, không xài nước lãng phí.</li>
+            <li>Thường xuyên tái chế những vật dụng không dùng đến nữa: chai nhựa, giấy báo.</li>
+          </ul>
         </div>
       );
     } else {

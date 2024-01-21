@@ -123,26 +123,4 @@
 
 /* Style for buttons */
 /* Style for buttons */
-.button-container {
-  display: flex;
-  justify-content: space-around; 
-}
 
-.button-container button {
-  flex: 1; /* Distribute available space equally */
-  padding: 10px 15px; /* Adjust padding as needed */
-  /* background-color: #007bff; */
-  color: #ffffff; /* Set text color */
-  border: none;
-  border-radius: 5px; /* Add rounded corners */
-  cursor: pointer;
-  font-size: 14px; /* Set font size */
-}
-
-.button-container button:hover {
-  background-color: #0056b3; 
-}
-
-.button-container button + button {
-  margin-left: 10px; /* Add space between buttons */
-}

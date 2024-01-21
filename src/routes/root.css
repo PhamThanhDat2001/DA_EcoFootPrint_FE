@@ -14,7 +14,7 @@
   .navleft {
     display: flex;
     flex-direction: row;
-    min-height: 100vh; /* Đảm bảo body có ít nhất chiều cao bằng viewport */
+    min-height: 100vh; 
     margin: 0;
     flex: 1;
   }
@@ -68,10 +68,12 @@ html {
     background-color: white;
     line-height: 1.5;
     margin: 0;
+   
   }
   button {
     color: #3992ff;
     font-weight: 500;
+  
   }
   
   textarea:hover,
@@ -152,7 +154,7 @@ html {
     position: fixed;
     top: 70px;
     left: 0;
-    height: 100vh; /* Make the sidebar take the full height of the viewport */
+    height: 100vh; 
     overflow-y: auto; /* Add scrollbar if content overflows */
   }
   
@@ -441,6 +443,11 @@ body {
   /* Reset CSS */
 
 
-
+  li {
+    border: 1px solid #ddd;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    padding: 16px;
+  }
 
 

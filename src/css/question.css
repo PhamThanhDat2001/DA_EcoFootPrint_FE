@@ -1,4 +1,13 @@
-/* question.css */
+.rounded-circle {
+  border-radius: 50%;
+}
+
+li {
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  padding: 16px;
+}
 
 .community-container {
   max-width: 800px;
@@ -34,6 +43,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 8px;
 }
 
 button:hover {
@@ -45,18 +55,12 @@ ul {
   padding: 0;
 }
 
-li {
-  border: 1px solid #ddd;
-  margin-bottom: 8px;
-  padding: 16px;
-  border-radius: 4px;
-}
+
 
 li button {
   background-color: #28a745;
   color: #fff;
   padding: 4px 8px;
-  margin-top: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -66,17 +70,10 @@ li button:hover {
   background-color: #218838;
 }
 
-li > div {
-  margin-top: 16px;
-}
-
-/* Answer Form */
-li form {
-  margin-top: 16px;
-}
-
 /* Answers List */
 ul ul {
+  list-style: none;
+  padding: 0;
   margin-top: 8px;
 }
 
@@ -90,7 +87,6 @@ ul ul li {
 
 /* Close Button */
 li > div > button {
-  margin-top: 16px;
   background-color: #dc3545;
 }
 
@@ -99,12 +95,78 @@ li > div > button:hover {
 }
 
 
+/* CSS cho câu trả lời chính */
+/* Thêm style cho hình ảnh người dùng và thông tin liên quan */
+/* Thêm style cho hình ảnh người dùng và thông tin liên quan */
+/* ul.answers li p {
+  display: flex;
+  align-items: center;
+} */
+/* 
+ul.answers li img {
+  margin-right: 10px;  Khoảng cách giữa hình ảnh và username 
+}
 
+ul.answers li p {
+  margin-bottom: 8px;  Khoảng cách giữa username và câu trả lời 
+} */
 
+/* Thêm style cho câu trả lời của câu trả lời (replies) */
+/* ul.replies li p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;  Khoảng cách giữa username và câu trả lời của câu trả lời 
+}
 
-
-
-
-
-
-
+ul.replies li img {
+  margin-right: 10px;  Khoảng cách giữa hình ảnh và username trong câu trả lời của câu trả lời 
+} */
+.nguoidung {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.nguoidungtraloi {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+img{
+  margin-right: 15px;  
+}
+.cauhoi{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-bottom: 5px;
+  width: 700px  ;
+}
+.cautraloi{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-bottom: 5px;
+  width: 600px  ;
+}
+.xemcautraloi {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.xemcautraloi:hover {
+  background-color: #0056b3;
+}
+form button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+form button:hover {
+  background-color: #0056b3;
+}

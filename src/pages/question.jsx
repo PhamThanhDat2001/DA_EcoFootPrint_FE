@@ -1,4 +1,3 @@
-// Community.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/question.css';
@@ -8,14 +7,14 @@ const Community = () => {
   const [newQuestionContent, setNewQuestionContent] = useState('');
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [newAnswerContent, setNewAnswerContent] = useState('');
+  const [newReplyContent, setNewReplyContent] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [username, setUsername] = useState('');
-  const [showAnswers, setShowAnswers] = useState(false); // State to track whether to show answers
+  const [showAnswers, setShowAnswers] = useState(false);
 
   useEffect(() => {
-    // Fetch questions from the backend when the component mounts
     fetchQuestions();
 
-    // Get the username from localStorage
     const storedUsername = localStorage.getItem('username');
     setUsername(storedUsername);
   }, []);
@@ -48,17 +47,14 @@ const Community = () => {
     e.preventDefault();
 
     try {
-      // Send a POST request to create a new question
       await axios.post('http://localhost:8080/api/v1/questions', {
         content: newQuestionContent,
-        username: localStorage.getItem('username'), // Include the username in the request
+        username: localStorage.getItem('username'),
         userid: localStorage.getItem('id')
       });
 
-      // Fetch updated list of questions
       fetchQuestions();
 
-      // Clear the input field
       setNewQuestionContent('');
     } catch (error) {
       console.error('Error creating question:', error);
@@ -66,35 +62,67 @@ const Community = () => {
   };
 
   const handleQuestionClick = (questionId) => {
-    setSelectedQuestion(questionId);
-    setShowAnswers(true); // Show answers when a question is clicked
-    fetchAnswers(questionId);
+    if (selectedQuestion === questionId) {
+      setSelectedQuestion(null);
+      setShowAnswers(false);
+    } else {
+      setSelectedQuestion(questionId);
+      setShowAnswers(true);
+      fetchAnswers(questionId);
+    }
   };
 
   const handleAnswerSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Send a POST request to create a new answer
       await axios.post(`http://localhost:8080/api/v1/questions/${selectedQuestion}/answers`, {
         content: newAnswerContent,
-        // username: username, // Include the username in the request
-        username:localStorage.getItem('username'),
+        username: localStorage.getItem('username'),
         userid: localStorage.getItem('id')
       });
 
-      // Fetch updated answers for the selected question
       fetchAnswers(selectedQuestion);
-      // fetchAnswers();
-      // Clear the input field
+
       setNewAnswerContent('');
     } catch (error) {
       console.error('Error creating answer:', error);
     }
   };
 
+  const handleReplySubmit = async (e, answerId) => {
+    e.preventDefault();
+  
+    try {
+      // Gửi POST request để tạo câu trả lời mới cho câu trả lời của câu hỏi đã chọn
+      await axios.post(`http://localhost:8080/api/v1/questions/${selectedQuestion}/answers`, {
+        content: newReplyContent,
+        username: localStorage.getItem('username'),
+        userid: localStorage.getItem('id')
+      });
+  
+      // Lấy danh sách câu trả lời mới cho câu hỏi được chọn
+      fetchAnswers(selectedQuestion);
+  
+      // Xóa trường input
+      setNewReplyContent('');
+    } catch (error) {
+      console.error('Lỗi khi tạo câu trả lời:', error);
+    }
+  };
+
   const handleToggleAnswers = () => {
-    setShowAnswers(!showAnswers); // Toggle the state to show/hide answers
+    setSelectedQuestion(null);
+    setSelectedAnswer(null);
+    setShowAnswers(false);
+  };
+
+  const handleReplyClick = (answerId) => {
+    if (selectedAnswer === answerId) {
+      setSelectedAnswer(null);
+    } else {
+      setSelectedAnswer(answerId);
+    }
   };
 
   return (
@@ -117,34 +145,109 @@ const Community = () => {
       {/* List of Questions */}
       <ul>
         {questions.map((question) => (
+          
           <li key={question.id}>
-            {question.content} by {question.username}{' '}
-            <button onClick={() => handleQuestionClick(question.id)}>Xem các câu trả lời</button>
-            {selectedQuestion === question.id && showAnswers && (
+           
+            <div className='nguoidung'>
+            <img
+                alt="User"
+                src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                className="rounded-circle img-responsive mt-2"
+                width="50"
+                height="50"
+              />
+              <div>
+              {question.username}
+              <p className="cauhoi">{question.content}</p>
+              {!showAnswers && (
+              <button className='xemcautraloi' onClick={() => handleQuestionClick(question.id)}>Xem các câu trả lời</button>
+          
+          )}
+          
+          {selectedQuestion === question.id && showAnswers && (
               <div>
                 {/* Answer Form */}
-                <form onSubmit={handleAnswerSubmit}>
+            
+
+                {/* List of Answers */}
+                <ul>
+                  {question.answers &&
+                    question.answers.map((answer) => (
+                      <li key={answer.id}>
+                        <div className='nguoidungtraloi'>
+                          <img
+                            alt="User"
+                            src="https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                            className="rounded-circle img-responsive mt-2"
+                            width="50"
+                            height="50"
+                          />
+                          <div>
+                          {answer.username}
+
+                          <p className='cautraloi'>{answer.content}</p>
+                        {!showAnswers && (
+                          <button onClick={() => handleReplyClick(answer.id)}>Trả lời</button>
+                        )}
+                         <button onClick={() => handleReplyClick(answer.id)}>Trả lời</button>
+                        
+                          </div>
+                        </div>
+                      
+                       
+                         {selectedAnswer === answer.id && (
+          <div>
+            {/* Reply Form */}
+            <form onSubmit={(e) => handleReplySubmit(e, answer.id)}>
+              <label>
+                Câu trả lời của bạn:
+                <input
+                  type="text"
+                  value={newReplyContent}
+                  onChange={(e) => setNewReplyContent(e.target.value)}
+                />
+              </label>
+              <button type="submit">Trả lời</button>
+            </form>
+
+          {/* List of Replies */}
+          <ul className="replies">
+              {answer.replies &&
+                answer.replies.map((reply) => (
+                  <li key={reply.id}>
+                    <p>{reply.content}</p>
+                  </li>
+                ))}
+            </ul>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                </ul>
+                <div className='cautraloicuaban'>
+             <form onSubmit={handleAnswerSubmit}>
                   <label>
-                    Your Answer:
+                  Câu trả lời của bạn1:
                     <input
                       type="text"
                       value={newAnswerContent}
                       onChange={(e) => setNewAnswerContent(e.target.value)}
                     />
                   </label>
-                  <button type="submit">Xác nhận</button>
-                </form>
-                <button onClick={handleToggleAnswers}>Đóng</button>
 
-                {/* List of Answers */}
-                <ul>
-                  {question.answers &&
-                    question.answers.map((answer) => (
-                      <li key={answer.id}>{answer.content} by {answer.username}</li>
-                    ))}
-                </ul>
+                  <button style={{ marginLeft: '500px' }} type="submit">Xác nhận</button>
+                <button style={{ marginLeft: '20px' }}  onClick={handleToggleAnswers}>Đóng</button>
+
+                </form>
+             </div>
               </div>
             )}
+              </div>
+            </div>
+            <br />
+
+           
+
           </li>
         ))}
       </ul>

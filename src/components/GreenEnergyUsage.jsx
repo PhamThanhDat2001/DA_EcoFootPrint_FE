@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker,Input } from 'antd';
+import { Button, DatePicker,Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, Label } from "reactstrap";
@@ -139,9 +139,10 @@ const handleSelectChange2 = (e) => {
       energySource: e.target.value,
     })
   } /> */}
-  <select
+  <Select
         value={House.energySource}
         onChange={handleSelectChange}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn loại nhà ở</option>
         {validEnergySources.map((source, index) => (
@@ -149,7 +150,7 @@ const handleSelectChange2 = (e) => {
             {source}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Diện tích</Label>
     <Input value={House.usageAmount}  onChange={(e) =>
     setHouseAdd({
@@ -164,9 +165,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-   <select
+   <Select
         value={House.unit}
         onChange={handleSelectChange2}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -174,7 +176,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Mô tả</Label>
 <    Input value={House.description}  onChange={(e) =>
     setHouseAdd({
