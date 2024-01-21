@@ -53,3 +53,22 @@ body {
   padding: 0; /* Remove default padding */
   font-family: 'Arial', sans-serif; /* Set your desired font-family */
 }
+/* charts.css */
+
+.advice-container {
+  margin-top: 20px;
+}
+
+.advice-box {
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.advice-box p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}

@@ -68,28 +68,33 @@ const FoodConsumption = ({onFoodConsumptionDataChange}) => {
   setUpdateInfo(Info);
 
 }
+
 // const add = async (date,foodItem,quantity,unit,description) => {
-//   const isDuplicate = await FootprintApi.existsBydateFood(date);
+//   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
+//   console.log('res==',user_id)
+//   const isDuplicate = await FootprintApi.existsBydateanduseridGreenEnergy(date, user_id);
 
 //   if (isDuplicate) {
 //     console.log("Duplicated date! Cannot add duplicate entry.");
 //     return;
 //   }
-//   const Info = await FootprintApi.createFoodConsumption(date,foodItem,quantity,unit,description);
-//   setUpdateInfo(Info);
 
-// }
-const add = async (date,foodItem,quantity,unit,description) => {
-  const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
-  console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridGreenEnergy(date);
+//   const Info = await FootprintApi.createFoodConsumption(date,foodItem,quantity,unit,description, user_id);
+//   setUpdateInfo(Info);
+// };
+const add = async (date, foodItem, quantity, unit, description) => {
+  const user_id = localStorage.getItem('id');
+
+  // Check if there is already an entry for the selected date and user_id
+  const isDuplicate = await FootprintApi.existsBydateanduseridFood(date, user_id);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
 
-  const Info = await FootprintApi.createFoodConsumption(date,foodItem,quantity,unit,description, user_id);
+  // If not a duplicate, proceed to add the new entry
+  const Info = await FootprintApi.createFoodConsumption(date, foodItem, quantity, unit, description, user_id);
   setUpdateInfo(Info);
 };
 const validFoodItems = ['Gia súc', 'Gia cầm', 'Cá nước mặn', 'Cá nước ngọt', 
@@ -133,10 +138,10 @@ const handleSelectChange2 = (e) => {
 />
 
     <Label>Loại thực phẩm</Label>
-    <Select
+    <select
         value={FoodConsumption.foodItem}
         onChange={handleSelectChange}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn mục thực phẩm</option>
         {validFoodItems.map((item, index) => (
@@ -144,7 +149,7 @@ const handleSelectChange2 = (e) => {
             {item}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Số lượng tiêu thụ</Label>
     <Input value={FoodConsumption.quantity}  onChange={(e) =>
     setFoodConsumptionAdd({
@@ -159,10 +164,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-  <Select
+  <select
         value={FoodConsumption.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -170,7 +175,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={FoodConsumption.description}  onChange={(e) =>
     setFoodConsumptionAdd({

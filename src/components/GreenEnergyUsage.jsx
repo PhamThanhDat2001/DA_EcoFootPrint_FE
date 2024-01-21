@@ -83,7 +83,7 @@ const GreenEnergyUsage = ({onGreenEnergyUsageDataChange}) => {
 const add = async (date,energySource,usageAmount,unit,description) => {
   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
   console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridGreenEnergy(date);
+  const isDuplicate = await FootprintApi.existsBydateanduseridGreenEnergy(date, user_id);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
@@ -139,10 +139,10 @@ const handleSelectChange2 = (e) => {
       energySource: e.target.value,
     })
   } /> */}
-  <Select
+  <select
         value={House.energySource}
         onChange={handleSelectChange}
-        style={{ width: '100%' }}
+        style={{ width: '100%' ,height:'35px'}}
       >
         <option value="">Chọn loại nhà ở</option>
         {validEnergySources.map((source, index) => (
@@ -150,7 +150,7 @@ const handleSelectChange2 = (e) => {
             {source}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Diện tích</Label>
     <Input value={House.usageAmount}  onChange={(e) =>
     setHouseAdd({
@@ -165,10 +165,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-   <Select
+   <select
         value={House.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -176,7 +176,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={House.description}  onChange={(e) =>
     setHouseAdd({

@@ -274,7 +274,7 @@ const greenEnergyUsage = (() => {
     const rawEnergyConsumption= energyConsumptionData?.consumption ?? 0;
 const energyConsumption = (() => {
   if (energyConsumptionData?.energyType === 'Điện' && energyConsumptionData?.unit === 'kWh') {
-    return  (rawEnergyConsumption  / 27.16) * EQFbaidanhcabien
+    return  (rawEnergyConsumption  / 27.16) * EQFcosohatang
   } else if (energyConsumptionData?.energyType === 'Năng lượng gió'&& energyConsumptionData?.unit === 'kWh') {
     return  (rawEnergyConsumption / 125.9) * EQFcosohatang
   } 
