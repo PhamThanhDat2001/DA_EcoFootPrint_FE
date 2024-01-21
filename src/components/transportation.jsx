@@ -85,9 +85,9 @@ const Transportation = ({onTransportationDataChange}) => {
 const add = async (date,transportMode,distance,unit,description) => {
   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
   console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridTransport(date);
+  const isDuplicate = await FootprintApi.existsBydateanduseridTransport(date, user_id);
 
-  if (isDuplicate) {
+  if (isDuplicate) {  
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
@@ -140,10 +140,10 @@ const handleSelectChange2 = (e) => {
       transportMode: e.target.value,
     })
   } /> */}
-  <Select
+  <select
         value={transportation.transportMode}
         onChange={handleSelectChange}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn phương tiện vận chuyển</option>
         {validTransportModes.map((mode, index) => (
@@ -151,7 +151,7 @@ const handleSelectChange2 = (e) => {
             {mode}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Khoảng cách đã đi</Label>
     <Input value={transportation.distance}  onChange={(e) =>
     setTransportation({
@@ -166,10 +166,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-  <Select
+  <select
         value={transportation.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -177,7 +177,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={transportation.description}  onChange={(e) =>
     setTransportation({

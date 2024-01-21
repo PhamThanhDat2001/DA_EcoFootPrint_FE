@@ -91,21 +91,35 @@ useEffect(() => {
   
 // }
 
+// const add = async (date, usageType, consumption, unit, description) => {
+//   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
+//   console.log('res==',user_id)
+//   const isDuplicate = await FootprintApi.existsBydateanduseridWater(date);
+
+//   if (isDuplicate) {
+//     console.log("Duplicated date! Cannot add duplicate entry.");
+//     return;
+//   }
+
+//   const Info = await FootprintApi.createWaterConsumption(date, usageType, consumption, unit, description, user_id);
+//   setUpdateInfo(Info);
+// };
+
 const add = async (date, usageType, consumption, unit, description) => {
-  const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
-  console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridWater(date);
+  const user_id = localStorage.getItem('id');
+
+  // Check if there is already an entry for the selected date and user_id
+  const isDuplicate = await FootprintApi.existsBydateanduseridWater(date, user_id);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
     return;
   }
 
+  // If not a duplicate, proceed to add the new entry
   const Info = await FootprintApi.createWaterConsumption(date, usageType, consumption, unit, description, user_id);
   setUpdateInfo(Info);
 };
-
-
 
 
 
@@ -160,10 +174,10 @@ const handleSelectChange2 = (e) => {
 />
 
     <Label>Loại nước thụ tiêu thụ</Label>
-    <Select
+    <select
   value={WaterConsumption.usageType}
   onChange={handleSelectChange}
-  style={{ width: '100%' }}
+  style={{ width: '100%',height:'35px' }}
 >
   <option value="">Chọn loại sử dụng</option>
   {validUsageTypes.map((usageType, index) => (
@@ -171,7 +185,7 @@ const handleSelectChange2 = (e) => {
       {usageType}
     </option>
   ))}
-</Select>
+</select>
 
 {/* <Label>Loại nước thụ tiêu thụ</Label>
 <Select
@@ -206,10 +220,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-  <Select
+  <select
         value={WaterConsumption.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -217,7 +231,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={WaterConsumption.description}  onChange={(e) =>
     setWaterConsumptionAdd({

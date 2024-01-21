@@ -84,7 +84,7 @@ const EnergyConsumption = ({onEnergyConsumptionDataChange}) => {
 const add = async (date, energyType, consumption, unit, description) => {
   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
   console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridEnergyConsumption(date);
+  const isDuplicate = await FootprintApi.existsBydateanduseridEnergyConsumption(date, user_id);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
@@ -146,10 +146,10 @@ const handleSelectChange2 = (e) => {
       energyType: e.target.value,
     })
   } /> */}
-  <Select
+  <select
         value={energyConsumption.energyType}
         onChange={handleSelectChange}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn loại năng lượng</option>
         {validEnergyTypes.map((type, index) => (
@@ -157,7 +157,7 @@ const handleSelectChange2 = (e) => {
             {type}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Số liệu tiêu thụ</Label>
     <Input value={energyConsumption.consumption}  onChange={(e) =>
     setEnergyConsumption({
@@ -172,10 +172,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-   <Select
+   <select
         value={energyConsumption.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {consumptionOptions.map((option, index) => (
@@ -183,7 +183,7 @@ const handleSelectChange2 = (e) => {
             {option}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={energyConsumption.description}  onChange={(e) =>
     setEnergyConsumption({

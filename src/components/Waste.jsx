@@ -87,7 +87,7 @@ const Waste = ({onWasteDataChange}) => {
 const add = async (date,wasteType,amount,unit,description) => {
   const user_id = localStorage.getItem('id'); // Replace with the correct method to get the user_id
   console.log('res==',user_id)
-  const isDuplicate = await FootprintApi.existsBydateanduseridWaste(date);
+  const isDuplicate = await FootprintApi.existsBydateanduseridWaste(date, user_id);
 
   if (isDuplicate) {
     console.log("Duplicated date! Cannot add duplicate entry.");
@@ -142,10 +142,10 @@ const handleSelectChange2 = (e) => {
       wasteType: e.target.value,
     })
   } /> */}
-  <Select
+  <select
         value={Waste.wasteType}
         onChange={handleSelectChange}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn loại chất thải</option>
         {validWasteTypes.map((type, index) => (
@@ -153,7 +153,7 @@ const handleSelectChange2 = (e) => {
             {type}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Số lượng chất thải</Label>
     <Input value={Waste.amount}  onChange={(e) =>
     setWasteAdd({
@@ -168,10 +168,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-    <Select
+    <select
         value={Waste.unit}
         onChange={handleSelectChange2}
-        style={{ width: '100%' }}
+        style={{ width: '100%',height:'35px' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -179,7 +179,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </Select>
+      </select>
     <Label>Mô tả</Label>
 <    Input value={Waste.description}  onChange={(e) =>
     setWasteAdd({
