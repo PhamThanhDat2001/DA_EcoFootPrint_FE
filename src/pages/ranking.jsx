@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table } from 'antd';
-
+import '../css/ranking.css';
 const Ranking = () => {
   const [rankings, setRankings] = useState([]);
 
@@ -71,14 +71,14 @@ const Ranking = () => {
   ];
 
   return (
-    <div>
-      <h2>Bảng xếp hạng</h2>
-      <Table
-        columns={columns}
-        dataSource={rankedData}
-        rowKey={(record) => record.stt}
-      />
-    </div>
+    <div className="table-container">
+    <h2>Bảng xếp hạng</h2>
+    <Table
+      columns={columns}
+      dataSource={rankedData}
+      rowKey={(record) => record.stt}
+    />
+  </div>
   );
 };
 

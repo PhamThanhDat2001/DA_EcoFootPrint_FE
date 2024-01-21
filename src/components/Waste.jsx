@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker,Input } from 'antd';
+import { Button, DatePicker,Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, Label } from "reactstrap";
@@ -142,9 +142,10 @@ const handleSelectChange2 = (e) => {
       wasteType: e.target.value,
     })
   } /> */}
-  <select
+  <Select
         value={Waste.wasteType}
         onChange={handleSelectChange}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn loại chất thải</option>
         {validWasteTypes.map((type, index) => (
@@ -152,7 +153,7 @@ const handleSelectChange2 = (e) => {
             {type}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Số lượng chất thải</Label>
     <Input value={Waste.amount}  onChange={(e) =>
     setWasteAdd({
@@ -167,9 +168,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-    <select
+    <Select
         value={Waste.unit}
         onChange={handleSelectChange2}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -177,7 +179,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Mô tả</Label>
 <    Input value={Waste.description}  onChange={(e) =>
     setWasteAdd({

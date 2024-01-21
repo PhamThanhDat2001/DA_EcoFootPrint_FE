@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker,Input } from 'antd';
+import { Button, DatePicker,Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, Label } from "reactstrap";
@@ -146,9 +146,10 @@ const handleSelectChange2 = (e) => {
       energyType: e.target.value,
     })
   } /> */}
-  <select
+  <Select
         value={energyConsumption.energyType}
         onChange={handleSelectChange}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn loại năng lượng</option>
         {validEnergyTypes.map((type, index) => (
@@ -156,7 +157,7 @@ const handleSelectChange2 = (e) => {
             {type}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Số liệu tiêu thụ</Label>
     <Input value={energyConsumption.consumption}  onChange={(e) =>
     setEnergyConsumption({
@@ -171,9 +172,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-   <select
+   <Select
         value={energyConsumption.unit}
         onChange={handleSelectChange2}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn đơn vị</option>
         {consumptionOptions.map((option, index) => (
@@ -181,7 +183,7 @@ const handleSelectChange2 = (e) => {
             {option}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Mô tả</Label>
 <    Input value={energyConsumption.description}  onChange={(e) =>
     setEnergyConsumption({

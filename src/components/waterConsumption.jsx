@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker,Input } from 'antd';
+import { Button, DatePicker,Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, Label } from "reactstrap";
@@ -160,9 +160,10 @@ const handleSelectChange2 = (e) => {
 />
 
     <Label>Loại nước thụ tiêu thụ</Label>
-    <select
+    <Select
   value={WaterConsumption.usageType}
   onChange={handleSelectChange}
+  style={{ width: '100%' }}
 >
   <option value="">Chọn loại sử dụng</option>
   {validUsageTypes.map((usageType, index) => (
@@ -170,19 +171,21 @@ const handleSelectChange2 = (e) => {
       {usageType}
     </option>
   ))}
-</select>
-{/* <select
-        value={WaterConsumptionAdd.usageType}
-        onChange={handleSelectChange}
-      >
-        <option value="">Chọn loại sử dụng</option>
-        {validUsageTypes.map((usageType, index) => (
-          <option key={index} value={usageType}>
-            {usageType}
-          </option>
-        ))}
-      </select> */}
+</Select>
 
+{/* <Label>Loại nước thụ tiêu thụ</Label>
+<Select
+  value={WaterConsumption.usageType}
+  onChange={handleSelectChange}
+  style={{ width: '100%' }}
+>
+  <Option value="">Chọn loại sử dụng</Option>
+  {validUsageTypes.map((usageType, index) => (
+    <Option key={index} value={usageType}>
+      {usageType}
+    </Option>
+  ))}
+</Select> */}
     <Label>Số lượng nước tiêu thụ</Label>
     <Input
         value={WaterConsumption.consumption}
@@ -203,9 +206,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-  <select
+  <Select
         value={WaterConsumption.unit}
         onChange={handleSelectChange2}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -213,7 +217,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Mô tả</Label>
 <    Input value={WaterConsumption.description}  onChange={(e) =>
     setWaterConsumptionAdd({

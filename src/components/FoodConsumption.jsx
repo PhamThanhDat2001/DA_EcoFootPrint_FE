@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Button, DatePicker,Input } from 'antd';
+import { Button, DatePicker,Input, Select } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, Label } from "reactstrap";
@@ -133,9 +133,10 @@ const handleSelectChange2 = (e) => {
 />
 
     <Label>Loại thực phẩm</Label>
-    <select
+    <Select
         value={FoodConsumption.foodItem}
         onChange={handleSelectChange}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn mục thực phẩm</option>
         {validFoodItems.map((item, index) => (
@@ -143,7 +144,7 @@ const handleSelectChange2 = (e) => {
             {item}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Số lượng tiêu thụ</Label>
     <Input value={FoodConsumption.quantity}  onChange={(e) =>
     setFoodConsumptionAdd({
@@ -158,9 +159,10 @@ const handleSelectChange2 = (e) => {
       unit: e.target.value,
     })
   }/> */}
-  <select
+  <Select
         value={FoodConsumption.unit}
         onChange={handleSelectChange2}
+        style={{ width: '100%' }}
       >
         <option value="">Chọn đơn vị</option>
         {validUnits.map((unit, index) => (
@@ -168,7 +170,7 @@ const handleSelectChange2 = (e) => {
             {unit}
           </option>
         ))}
-      </select>
+      </Select>
     <Label>Mô tả</Label>
 <    Input value={FoodConsumption.description}  onChange={(e) =>
     setFoodConsumptionAdd({

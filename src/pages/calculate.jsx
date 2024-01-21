@@ -288,27 +288,27 @@ const energyConsumption = (() => {
     const rawWaste= wasteData?.amount ?? 0;
 const waste = (() => {
   if (wasteData?.wasteType === 'Rác thải sinh hoạt' && wasteData?.unit === 'Kilogram (kg)') {
-    return  ((rawWaste / 1000) / 4.3) * EQFcarbon
+    return  ((rawWaste ) / 4.3) * EQFcarbon
   } else if (wasteData?.wasteType === 'Rác thải sinh hoạt'&& wasteData?.unit === 'Gram (g)') {
-    return  ((rawWaste /  1000000) / 4.3) * EQFcarbon
+    return  ((rawWaste /  1000) / 4.3) * EQFcarbon
   } 
   else if (wasteData?.wasteType === 'Rác thải sinh hoạt'&& wasteData?.unit === 'Tấn') {
     return  (rawWaste / 4.3) * EQFcarbon
   } 
   else if (wasteData?.wasteType === 'Rác thải công nghiệp'&& wasteData?.unit === 'Kilogram (kg)') {
-    return  ((rawWaste / 1000) / 4.3) * EQFcarbon
+    return  ((rawWaste ) / 4.3) * EQFcarbon
   } 
    else if (wasteData?.wasteType === 'Rác thải công nghiệp'&& wasteData?.unit === 'Gram (g)') {
-    return  ((rawWaste /  1000000) / 4.3) * EQFcarbon
+    return  ((rawWaste /  1000) / 4.3) * EQFcarbon
   } 
   else if (wasteData?.wasteType === 'Rác thải công nghiệp'&& wasteData?.unit === 'Tấn') {
     return  (rawWaste / 4.3) * EQFcarbon
   } 
   else if (wasteData?.wasteType === 'Rác thải xây dựng'&& wasteData?.unit === 'Kilogram (kg)') {
-    return ((rawWaste / 1000) / 4.3) * EQFcarbon
+    return ((rawWaste ) / 4.3) * EQFcarbon
   } 
    else if (wasteData?.wasteType === 'Rác thải xây dựng'&& wasteData?.unit === 'Gram (g)') {
-    return ((rawWaste /  1000000) / 4.3) * EQFcarbon
+    return ((rawWaste /  1000) / 4.3) * EQFcarbon
   } 
   else if (wasteData?.wasteType === 'Rác thải xây dựng'&& wasteData?.unit === 'Tấn') {
     return  (rawWaste / 4.3) * EQFcarbon
